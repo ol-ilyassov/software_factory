@@ -1,11 +1,13 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-    <h1>Hello World!</h1>
+<?php
+include "includes/header.php"
+?>
 
-  </body>
-</html>
+<div style="padding-left:20px">
+  <h1>Welcome to the Robotics</h1>
+  <p>By Olzhas Ilyassov and Alibek Sovetkazhiyev</p>
+  <p>Some content..</p>
+</div>
+
+<?php
+include "includes/footer.php"
+?>
