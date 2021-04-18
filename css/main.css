@@ -65,3 +65,33 @@
       text-decoration: none;
       color: red;
   }
+ 
+#content{
+  width: 50%;
+  margin: 20px auto;
+  border: 1px solid #cbcbcb;
+}
+#gallery_form{
+  width: 50%;
+  margin: 20px auto;
+}
+#gallery_form div{
+  margin-top: 5px;
+}
+#img_div{
+  width: 50%;
+  padding: 5px;
+  margin: 15px auto;
+  border: 1px solid #cbcbcb;
+}
+#img_div:after{
+  content: "";
+  display: block;
+  clear: both;
+}
+#image{
+  float: left;
+  margin: 5px;
+  width: 150px;
+  height: 140px;
+}

@@ -7,11 +7,12 @@
   </head>
   <body>
   <div class="header">
-  <a href="#default" class="logo">CompanyLogo</a>
+  <a href="index.php" class="logo">RoboticsLogo</a>  
   <div class="header-right">
-    <a href="#home">Home</a>
-    <a href="#contact">Contact</a>
-    <a href="#about">About</a>
+    <a href="index.php">Home</a>
+    <a href="about.php">About</a>
+    <a href="gallery.php">Gallery</a>
+    <a href="rules.php">Rules</a>
     <a href="login.php">Login</a>
   </div>
 </div>
