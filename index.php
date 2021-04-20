@@ -1,4 +1,5 @@
 <?php
+$title = "ROBOTICS";
 include "includes/header.php"
 ?>
 
