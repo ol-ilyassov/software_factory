@@ -1,3 +1,71 @@
+
+/* - Common Parameters - */
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+fieldset {
+  border: none;
+}
+
+.btn {
+  background: orange;
+  border: 1px solid orange;
+  color: white;
+  margin: 10px;
+  padding: 15px;
+}
+
+.btn:hover {
+  background: white;
+  color: orange;
+}
+
+.btn:active {
+  background: darkorange;
+  color: white;
+}
+
+/* - Register.php - */
+
+#reg-form-display {
+  display: grid;
+  grid-template-columns: repeat(2, 2fr)
+}
+
+#reg-form-display div {
+  margin: 10px;
+}
+
+#reg-phone_number_code {
+  width: 25px;
+}
+
+#reg-phone_number_part1 {
+  width: 25px;
+}
+
+#reg-phone_number_part2 {
+  width: 15px;
+}
+
+#reg-phone_number_part3 {
+  width: 15px;
+}
+
+#buttons {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .header {
     overflow: hidden;
     background-color: #f1f1f1;
