@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Апр 20 2021 г., 21:45
+-- Время создания: Апр 27 2021 г., 20:23
 -- Версия сервера: 10.1.38-MariaDB
 -- Версия PHP: 7.3.2
 
@@ -34,6 +34,13 @@ CREATE TABLE `administrator` (
   `email` varchar(40) NOT NULL,
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `administrator`
+--
+
+INSERT INTO `administrator` (`admin_id`, `fname`, `email`, `password`) VALUES
+(1, 'Olzhas', 'ol.ilyassov@gmail.com', 'b2a2c3f03b613d49b478a403ff23f119');
 
 -- --------------------------------------------------------
 
@@ -152,8 +159,15 @@ CREATE TABLE `team` (
   `organisation` varchar(40) NOT NULL,
   `locality` varchar(120) NOT NULL,
   `category_id` int(11) NOT NULL,
-  `phonenumber` int(10) NOT NULL
+  `phonenumber` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `team`
+--
+
+INSERT INTO `team` (`team_id`, `teamname`, `email`, `password`, `p1_fname`, `p1_lname`, `p2_fname`, `p2_lname`, `organisation`, `locality`, `category_id`, `phonenumber`) VALUES
+(1, 'BostonJuniors', 'bostonDgroup@gmail.com', 'cdb88e64771f7914113d85078def265f', 'Temirlan', 'Seitkali', 'Abylay', 'Seilbek', 'BostonDynamics', 'Nur-Sultan', 1, '7751756513');
 
 -- --------------------------------------------------------
 
@@ -239,7 +253,7 @@ ALTER TABLE `team_status`
 -- AUTO_INCREMENT для таблицы `administrator`
 --
 ALTER TABLE `administrator`
-  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT для таблицы `category`
@@ -281,7 +295,7 @@ ALTER TABLE `sumo`
 -- AUTO_INCREMENT для таблицы `team`
 --
 ALTER TABLE `team`
-  MODIFY `team_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `team_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT для таблицы `team_status`
