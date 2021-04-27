@@ -6,8 +6,8 @@ function validateEmail(input) {
 }
 
 function pregMatchCommon(input) {
-    const emailFormat = /^[a-zA-Z0-9!@#$%^&*()_+-<>?]*$/;
-    return emailFormat.test(input);
+    const regExp = /^[a-zA-Z0-9!@#$%^&*()_+-<>?]*$/;
+    return regExp.test(input);
 }
 
 function pregMatchAlphabets(input) {
@@ -21,494 +21,583 @@ function pregMatchNumbers(input) {
     return regExp.test(input);
 }
 
+function pregMatchComplexName(input) {
+    const regExp = /^[a-zA-Z ,_-]*$/;
+    return regExp.test(input);
+}
+
 /* --- [Registration] --- */
 
-// Function to check Reserve state of Team Name
-// $(document).ready(function(){
-//     $('#team_name').keyup(function(){
-//         var flagTeam_name = false;
-//         var team_name = $('#team_name').val();
-//         if (team_name == "") {
-//             $('#team_name_status').text("Status");
-//             $('#team_name_status').css("color", "black");
-//         } else {
-//             $.post("php/checkRealTime.php", function(data) {
-//                 data = JSON.parse(data);
-//                 for (var key in data) {
-//                     if (data[key].login.toLowerCase() == login.toLowerCase()) {
-//                         flagTeam_name = true;
-//                     }
-//                 }
-//                 if (flagTeam_name == true) {
-//                     $('#team_name_status').text("Reserved");
-//                     $('#team_name_status').css("color", "red");
-//                 } else {
-//                     $('#team_name_status').text("Free");
-//                     $('#team_name_status').css("color", "green");
-//                 }
-//             });
-//         }
-//     });
-// });
-
-// Function to check Reserve state of Email
-// $(document).ready(function(){
-//     $('#team_name').keyup(function(){
-//         var flagTeam_name = false;
-//         var team_name = $('#team_name').val();
-//         if (team_name == "") {
-//             $('#team_name_status').text("Status");
-//             $('#team_name_status').css("color", "black");
-//         } else {
-//             $.post("php/checkRealTime.php", function(data) {
-//                 data = JSON.parse(data);
-//                 for (var key in data) {
-//                     if (data[key].login.toLowerCase() == login.toLowerCase()) {
-//                         flagTeam_name = true;
-//                     }
-//                 }
-//                 if (flagTeam_name == true) {
-//                     $('#team_name_status').text("Reserved");
-//                     $('#team_name_status').css("color", "red");
-//                 } else {
-//                     $('#team_name_status').text("Free");
-//                     $('#team_name_status').css("color", "green");
-//                 }
-//             });
-//         }
-//     });
-// });
-
-// Check the Correctness of input data in Real Time
 $(document).ready(function () {
-    $('#reg-team_name').keyup(function () {
-        $('#reg-team_name_error').text("");
-        $('#fail-msg').text("");
-        if (!pregMatchCommon($('#reg-team_name').val())) {
-            $('#reg-team_name_error').text("- Wrong Team Name Format -");
-        }
-    });
-    $('#reg-email').keyup(function () {
-        $('#reg-email_error').text("");
-        $('#fail-msg').text("");
-        if (!validateEmail($('#reg-email').val())) {
-            $('#reg-email_error').text("- Wrong Email Format -");
-        }
-    });
-    $('#reg-password').keyup(function () {
-        $('#reg-password_error').text("");
-        $('#fail-msg').text("");
-        if (!pregMatchCommon($('#reg-password').val())) {
-            $('#reg-password_error').text("- Wrong Password Format -");
-        }
-    });
-    $('#reg-re_password').keyup(function () {
-        $('#reg-re_password_error').text("");
-        $('#fail-msg').text("");
-        if (!pregMatchCommon($('#reg-re_password').val())) {
-            $('#reg-re_password_error').text("- Wrong Re-Password Format -");
-        }
-    });
-    $('#reg-member1_first_name').keyup(function () {
-        $('#reg-member1_first_name_error').text("");
-        $('#fail-msg').text("");
-        if (!pregMatchAlphabets($('#reg-member1_first_name').val())) {
-            $('#reg-member1_first_name_error').text("- Wrong First Name Format -");
-        }
-    });
-    $('#reg-member1_last_name').keyup(function () {
-        $('#reg-member1_last_name_error').text("");
-        $('#fail-msg').text("");
-        if (!pregMatchAlphabets($('#reg-member1_last_name').val())) {
-            $('#reg-member1_last_name_error').text("- Wrong Last Name Format -");
-        }
-    });
-    $('#reg-member2_first_name').keyup(function () {
-        $('#reg-member2_first_name_error').text("");
-        $('#fail-msg').text("");
-        if (!pregMatchAlphabets($('#reg-member2_first_name').val())) {
-            $('#reg-member2_first_name_error').text("- Wrong First Name Format -");
-        }
-    });
-    $('#reg-member2_last_name').keyup(function () {
-        $('#reg-member2_last_name_error').text("");
-        $('#fail-msg').text("");
-        if (!pregMatchAlphabets($('#reg-member2_last_name').val())) {
-            $('#reg-member2_last_name_error').text("- Wrong Last Name Format -");
-        }
-    });
-    $('#reg-organisation').keyup(function () {
-        $('#reg-organisation_error').text("");
-        $('#fail-msg').text("");
-        if (!pregMatchCommon($('#reg-organisation').val())) {
-            $('#reg-organisation_error').text("- Wrong Organisation Format -");
-        }
-    });
-    $('#reg-locality').keyup(function () {
-        $('#reg-locality_error').text("");
-        $('#fail-msg').text("");
-        if (!pregMatchCommon($('#reg-locality').val())) {
-            $('#reg-locality_error').text("- Wrong Locality Format -");
-        }
-    });
-    $('#reg-category').bind("change", function () {
-        $('#reg-category_error').text("");
-        $('#fail-msg').text("");
-    });
-    $('#reg-phone_number_code').keyup(function () {
-        $('#reg-phone_number_error').text("");
-        $('#fail-msg').text("");
-        if (!pregMatchNumbers($('#reg-phone_number_code').val())) {
-            $('#reg-phone_number_error').text("- Wrong Phone Number Format -");
-        }
-    });
-    $('#reg-phone_number_part1').keyup(function () {
-        $('#reg-phone_number_error').text("");
-        $('#fail-msg').text("");
-        if (!pregMatchNumbers($('#reg-phone_number_part1').val())) {
-            $('#reg-phone_number_error').text("- Wrong Phone Number Format -");
-        }
-    });
-    $('#reg-phone_number_part2').keyup(function () {
-        $('#reg-phone_number_error').text("");
-        $('#fail-msg').text("");
-        if (!pregMatchNumbers($('#reg-phone_number_part2').val())) {
-            $('#reg-phone_number_error').text("- Wrong Phone Number Format -");
-        }
-    });
-    $('#reg-phone_number_part3').keyup(function () {
-        $('#reg-phone_number_error').text("");
-        $('#fail-msg').text("");
-        if (!pregMatchNumbers($('#reg-phone_number_part3').val())) {
-            $('#reg-phone_number_error').text("- Wrong Phone Number Format -");
-        }
-    });
-});
+    const regFailMsg = $('#regFailMsg');
+    const regSuccessMsg = $('#regSuccessMsg');
+    const regTeamNameStatus = $('#regTeamNameStatus');
+    const regEmailStatus = $('#regEmailStatus');
 
-// Check the Correctness of input data before inserting to Database
-$(document).ready(function () {
-    $('#reg-register-btn').click(function () {
-        $('#success-msg').text("");
-        $('#fail-msg').text("");
+    const regTeamName = $('#regTeamName');
+    const regEmail = $('#regEmail');
+    const regPassword = $('#regPassword');
+    const regRePassword = $('#regRePassword');
+    const regM1Fname = $('#regMember1FirstName');
+    const regM1Lname = $('#regMember1LastName');
+    const regM2Fname = $('#regMember2FirstName');
+    const regM2Lname = $('#regMember2LastName');
+    const regOrganisation = $('#regOrganisation');
+    const regLocality = $('#regLocality');
+    const regCategory = $('#regCategory');
+    const regPhoneNumberCode = $('#regPhoneNumberCode');
+    const regPhoneNumberPart1 = $('#regPhoneNumberPart1');
+    const regPhoneNumberPart2 = $('#regPhoneNumberPart2');
+    const regPhoneNumberPart3 = $('#regPhoneNumberPart3');
 
-        $('#reg-team_name_error').text("");
-        $('#reg-email_error').text("");
-        $('#reg-password_error').text("");
-        $('#reg-re_password_error').text("");
-        $('#reg-member1_first_name_error').text("");
-        $('#reg-member1_last_name_error').text("");
-        $('#reg-member2_first_name_error').text("");
-        $('#reg-member2_last_name_error').text("");
-        $('#reg-organisation_error').text("");
-        $('#reg-locality_error').text("");
-        $('#reg-category_error').text("");
-        $('#reg-phone_number_error').text("");
+    const regTeamNameError = $('#regTeamNameError');
+    const regEmailError = $('#regEmailError');
+    const regPasswordError = $('#regPasswordError');
+    const regRePasswordError = $('#regRePasswordError');
+    const regM1FnameError = $('#regMember1FirstNameError');
+    const regM1LnameError = $('#regMember1LastNameError');
+    const regM2FnameError = $('#regMember2FirstNameError');
+    const regM2LnameError = $('#regMember2LastNameError');
+    const regOrganisationError = $('#regOrganisationError');
+    const regLocalityError = $('#regLocalityError');
+    const regCategoryError = $('#regCategoryError');
+    const regPhoneNumberError = $('#regPhoneNumberError');
 
-        var team_name = $('#reg-team_name').val();
-        var email = $('#reg-email').val();
-        var password = $('#reg-password').val();
-        var re_password = $('#reg-re_password').val();
-        var m1_fname = $('#reg-member1_first_name').val();
-        var m1_lname = $('#reg-member1_last_name').val();
-        var m2_fname = $('#reg-member2_first_name').val();
-        var m2_lname = $('#reg-member2_last_name').val();
-        var organisation = $('#reg-organisation').val();
-        var locality = $('#reg-locality').val();
-        var category = $('#reg-category').val();
-        var phone_number = $('#reg-phone_number_code').val() +
-            $('#reg-phone_number_part1').val() +
-            $('#reg-phone_number_part2').val() +
-            $('#reg-phone_number_part3').val();
+    let regTeamNameFree = false;
+    let regEmailFree = false;
+    let pnCodeBool = true;
+    let pnPart1Bool = true;
+    let pnPart2Bool = true;
+    let pnPart3Bool = true;
 
-        var error = false;
-
-        if (category == 0) {
-            $('#reg-category_error').text("- Category is required -");
-            error = true;
-        }
-
-        if (team_name === "") {
-            $('#reg-team_name_error').text("- Team name is required -");
-            error = true;
-        } else if (!pregMatchCommon(team_name)) {
-            $('#reg-team_name_error').text("- Wrong Team name format -");
-            error = true;
-        } else if (team_name.length < 3 || team_name.length > 40) {
-            $('#reg-team_name_error').text("- Length must be from 3 to 40 characters -");
-            error = true;
-        } else if (false) {
-            // Reserved
-            error = true;
-        }
-
-        if (email === "") {
-            $('#reg-email_error').text("- Email is required -");
-            error = true;
-        } else if (!validateEmail(email)) {
-            $('#reg-email_error').text("- Wrong Email format -");
-            error = true;
-        } else if (email.length < 3 || email.length > 40) {
-            $('#reg-email_error').text("- Length must be from 3 to 40 characters -");
-            error = true;
-        } else if (false) {
-            // Reserved
-            error = true;
-        }
-
-        if (password === "") {
-            $('#reg-password_error').text("- Password is required -");
-            error = true;
-        } else if (!pregMatchCommon(password)) {
-            $('#reg-password_error').text("- Wrong Password format -");
-            error = true;
-        } else if (password.length < 3 || password.length > 40) {
-            $('#reg-password_error').text("- Length must be from 3 to 40 characters -");
-            error = true;
-        }
-
-        if (re_password === "") {
-            $('#reg-re_password_error').text("- Password is required -");
-            error = true;
-        } else if (!pregMatchCommon(re_password)) {
-            $('#reg-re_password_error').text("- Wrong Password format -");
-            error = true;
-        } else if (re_password.length < 3 || re_password.length > 40) {
-            $('#reg-re_password_error').text("- Length must be from 3 to 40 characters -");
-            error = true;
-        } else if (password !== re_password) {
-            $('#reg-re_password_error').text("- Passwords don't match -");
-            error = true;
-        }
-
-        if (m1_fname === "") {
-            $('#reg-member1_first_name_error').text("- First name is required -");
-            error = true;
-        } else if (!pregMatchAlphabets(m1_fname)) {
-            $('#reg-member1_first_name_error').text("- Only alphabets allowed -");
-            error = true;
-        } else if (m1_fname.length < 2 || m1_fname.length > 40) {
-            $('#reg-member1_first_name_error').text("- Length must be from 2 to 40 characters -");
-            error = true;
-        }
-
-        if (m1_lname === "") {
-            $('#reg-member1_last_name_error').text("- Last name is required -");
-            error = true;
-        } else if (!pregMatchAlphabets(m1_lname)) {
-            $('#reg-member1_last_name_error').text("- Only alphabets allowed -");
-            error = true;
-        } else if (m1_lname.length < 2 || m1_lname.length > 40) {
-            $('#reg-member1_last_name_error').text("- Length must be from 2 to 40 characters -");
-            error = true;
-        }
-
-        if (m2_fname === "") {
-            $('#reg-member2_first_name_error').text("- First name is required -");
-            error = true;
-        } else if (!pregMatchAlphabets(m2_fname)) {
-            $('#reg-member2_first_name_error').text("- Only alphabets allowed -");
-            error = true;
-        } else if (m2_fname.length < 2 || m2_fname.length > 40) {
-            $('#reg-member2_first_name_error').text("- Length must be from 2 to 40 characters -");
-            error = true;
-        }
-
-        if (m2_lname === "") {
-            $('#reg-member2_last_name_error').text("- Last name is required -");
-            error = true;
-        } else if (!pregMatchAlphabets(m2_lname)) {
-            $('#reg-member2_last_name_error').text("- Only alphabets allowed -");
-            error = true;
-        } else if (m2_lname.length < 2 || m2_lname.length > 40) {
-            $('#reg-member2_last_name_error').text("- Length must be from 2 to 40 characters -");
-            error = true;
-        }
-
-        if (organisation === "") {
-            $('#reg-organisation_error').text("- Organisation is required -");
-            error = true;
-        } else if (!pregMatchCommon(organisation)) {
-            $('#reg-organisation_error').text("- Wrong Organisation format -");
-            error = true;
-        } else if (organisation.length < 3 || organisation.length > 40) {
-            $('#reg-organisation_error').text("- Length must be from 3 to 40 characters -");
-            error = true;
-        }
-
-        if (locality === "") {
-            $('#reg-locality_error').text("- Locality is required -");
-            error = true;
-        } else if (!pregMatchCommon(locality)) {
-            $('#reg-locality_error').text("- Wrong Locality format -");
-            error = true;
-        } else if (locality.length < 3 || locality.length > 120) {
-            $('#reg-locality_error').text("- Length must be from 3 to 120 characters -");
-            error = true;
-        }
-
-        if (phone_number === "") {
-            $('#reg-phone_number_error').text("- Phone number is required -");
-            error = true;
-        } else if (!pregMatchNumbers(phone_number)) {
-            $('#reg-phone_number_error').text("- Only numbers allowed -");
-            error = true;
-        } else if (phone_number.length !== 10) {
-            $('#reg-phone_number_error').text("- Length must be equal to 10 numbers -");
-            error = true;
-        }
-
-        if (error) {
-            $('#fail-msg').text("- Error, Check input data! -");
+    // Check reserved Team Names
+    regTeamName.on('input', function () {
+        let text = regTeamName.val();
+        if (text === "") {
+            regTeamNameStatus.text("Status");
+            regTeamNameStatus.css("color", "black");
         } else {
-            $.post("php/login-register.php", {
-                team_name: team_name,
-                email: email,
-                password: password,
-                m1_fname: m1_fname,
-                m1_lname: m1_lname,
-                m2_fname: m2_fname,
-                m2_lname: m2_lname,
-                organisation: organisation,
-                locality: locality,
-                category: category,
-                phone_number: phone_number,
-                action: "registration"
+            $.post("php/checkRealTime.php", {
+                field: "teamname",
+                teamName: text
             }, function (data) {
-                if (data === "success") {
-                    $('#success-msg').text("- Successful Registration -");
-                    $('#fail-msg').text("");
+                data = JSON.parse(data);
+                if (data === "Reserved") {
+                    regTeamNameStatus.text("Reserved");
+                    regTeamNameStatus.css("color", "red");
+                    regTeamNameFree = false;
+                } else if (data === "Free") {
+                    regTeamNameStatus.text("Free");
+                    regTeamNameStatus.css("color", "green");
+                    regTeamNameFree = true;
                 } else {
-                    $('#success-msg').text("");
-                    $('#fail-msg').text(data);
+                    console.log(data);
+                    regTeamNameFree = false;
                 }
             });
         }
     });
-});
 
-// Clear Registration fields
-$(document).ready(function () {
-    $('#reg-clear-btn').click(function () {
-        $('#fail-msg').text("");
-        $('#success-msg').text("");
-        clearRegisterFields();
+    // Check reserved Email
+    regEmail.on('input', function () {
+        let text = regEmail.val();
+        if (text === "") {
+            regEmailStatus.text("Status");
+            regEmailStatus.css("color", "black");
+        } else {
+            $.post("php/checkRealTime.php", {
+                field: "email",
+                email: text
+            }, function (data) {
+                data = JSON.parse(data);
+                if (data === "Reserved") {
+                    regEmailStatus.text("Reserved");
+                    regEmailStatus.css("color", "red");
+                    regEmailFree = false;
+                } else if (data === "Free") {
+                    regEmailStatus.text("Free");
+                    regEmailStatus.css("color", "green");
+                    regEmailFree = true;
+                } else {
+                    console.log(data);
+                    regEmailFree = false;
+                }
+            });
+        }
     });
+
+    /** Check the Correctness of input data in Real Time */
+
+    regTeamName.on('input', function () {
+        regTeamNameError.text("");
+        regFailMsg.text("");
+        let text = regTeamName.val();
+        if (!pregMatchCommon(text)) {
+            regTeamNameError.text("- Invalid characters used -");
+        } else if (text.length > 40) {
+            regTeamNameError.text("- Length must be less than 40 characters -");
+        }
+    });
+    regEmail.on('input', function () {
+        regEmailError.text("");
+        regFailMsg.text("");
+        let text = regEmail.val();
+        if (!pregMatchCommon(text)) {
+            regEmailError.text("- Invalid characters used -");
+        } else if (text.length > 40) {
+            regEmailError.text("- Length must be less than 40 characters -");
+        }
+    });
+    regPassword.on('input', function () {
+        regPasswordError.text("");
+        regFailMsg.text("");
+        let text = regPassword.val();
+        if (!pregMatchCommon(text)) {
+            regPasswordError.text("- Invalid characters used -");
+        } else if (text.length > 40) {
+            regPasswordError.text("- Length must be less than 40 characters -");
+        }
+    });
+    regRePassword.on('input', function () {
+        regRePasswordError.text("");
+        regFailMsg.text("");
+        let text = regRePassword.val();
+        if (!pregMatchCommon(text)) {
+            regRePasswordError.text("- Invalid characters used -");
+        } else if (text.length > 40) {
+            regRePasswordError.text("- Length must be less than 40 characters -");
+        }
+    });
+    regM1Fname.on('input', function () {
+        regM1FnameError.text("");
+        regFailMsg.text("");
+        let text = regM1Fname.val();
+        if (!pregMatchAlphabets(text)) {
+            regM1FnameError.text("- Only Latin characters allowed -");
+        } else if (text.length > 40) {
+            regM1FnameError.text("- Length must be less than 40 characters -");
+        }
+    });
+    regM1Lname.on('input', function () {
+        regM1LnameError.text("");
+        regFailMsg.text("");
+        let text = regM1Lname.val();
+        if (!pregMatchAlphabets(text)) {
+            regM1LnameError.text("- Only Latin characters allowed -");
+        } else if (text.length > 40) {
+            regM1LnameError.text("- Length must be less than 40 characters -");
+        }
+    });
+    regM2Fname.on('input', function () {
+        regM2FnameError.text("");
+        regFailMsg.text("");
+        let text = regM2Fname.val();
+        if (!pregMatchAlphabets(text)) {
+            regM2FnameError.text("- Only Latin characters allowed -");
+        } else if (text.length > 40) {
+            regM2FnameError.text("- Length must be less than 40 characters -");
+        }
+    });
+    regM2Lname.on('input', function () {
+        regM2LnameError.text("");
+        regFailMsg.text("");
+        let text = regM2Lname.val();
+        if (!pregMatchAlphabets(text)) {
+            regM2LnameError.text("- Only Latin characters allowed -");
+        } else if (text.length > 40) {
+            regM2LnameError.text("- Length must be less than 40 characters -");
+        }
+    });
+    regOrganisation.on('input', function () {
+        regOrganisationError.text("");
+        regFailMsg.text("");
+        let text = regOrganisation.val();
+        if (!pregMatchComplexName(text)) {
+            regOrganisationError.text("- Invalid characters used -");
+        } else if (text.length > 40) {
+            regOrganisationError.text("- Length must be less than 40 characters -");
+        }
+    });
+    regLocality.on('input', function () {
+        regLocalityError.text("");
+        regFailMsg.text("");
+        let text = regLocality.val();
+        if (!pregMatchComplexName(text)) {
+            regLocalityError.text("- Invalid characters used -");
+        } else if (text.length > 120) {
+            regLocalityError.text("- Length must be less than 120 characters -");
+        }
+    });
+    regCategory.on("change", function () {
+        regCategoryError.text("");
+        regFailMsg.text("");
+    });
+    regPhoneNumberCode.on('input', function () {
+        pnCodeBool = checkPNByParts(regPhoneNumberCode);
+        checkPNAll()
+        if (regPhoneNumberCode.val().length > 2 && pnCodeBool) {
+            regPhoneNumberPart1.focus();
+        }
+    });
+    regPhoneNumberPart1.on('input', function () {
+        pnPart1Bool = checkPNByParts(regPhoneNumberPart1);
+        checkPNAll()
+        if (regPhoneNumberPart1.val().length > 2 && pnPart1Bool) {
+            regPhoneNumberPart2.focus();
+        }
+    });
+    regPhoneNumberPart2.on('input', function () {
+        pnPart2Bool = checkPNByParts(regPhoneNumberPart2);
+        checkPNAll()
+        if (regPhoneNumberPart2.val().length > 1 && pnPart2Bool) {
+            regPhoneNumberPart3.focus();
+        }
+    });
+    regPhoneNumberPart3.on('input', function () {
+        pnPart3Bool = checkPNByParts(regPhoneNumberPart3);
+        checkPNAll()
+    });
+
+    function checkPNByParts(input) {
+        regPhoneNumberError.text("");
+        regFailMsg.text("");
+        let text = input.val();
+        return pregMatchNumbers(text)
+    }
+
+    function checkPNAll() {
+        if (!pnCodeBool || !pnPart1Bool ||
+            !pnPart2Bool || !pnPart3Bool) {
+            regPhoneNumberError.text("- Only numbers allowed -");
+        }
+    }
+
+    /** Check the Correctness of input data on Button Click */
+
+    $('#regRegisterBtn').on('click', function () {
+        clearRegisterMessages()
+        const regPhoneNumber =
+            regPhoneNumberCode.val() + regPhoneNumberPart1.val() +
+            regPhoneNumberPart2.val() + regPhoneNumberPart3.val();
+        let error = false;
+
+        if (regCategory.val() === "0") {
+            $('#regCategoryError').text("- Category is required -");
+            error = true;
+        }
+
+        if (regTeamName.val() === "") {
+            regTeamNameError.text("- Team name is required -");
+            error = true;
+        } else if (!pregMatchCommon(regTeamName.val())) {
+            regTeamNameError.text("- Invalid characters used -");
+            error = true;
+        } else if (regTeamName.val().length < 3 || regTeamName.val().length > 40) {
+            regTeamNameError.text("- Length must be from 3 to 40 characters -");
+            error = true;
+        }
+        // else if (false) {
+        //     // Reserved
+        //     error = true;
+        // }
+
+        if (regEmail.val() === "") {
+            regEmailError.text("- Email is required -");
+            error = true;
+        } else if (!validateEmail(regEmail.val())) {
+            regEmailError.text("- Wrong email format -");
+            error = true;
+        } else if (regEmail.val().length < 3 || regEmail.val().length > 40) {
+            regEmailError.text("- Length must be from 3 to 40 characters -");
+            error = true;
+        }
+        // else if (false) {
+        //     // Reserved
+        //     error = true;
+        // }
+
+        if (regPassword.val() === "") {
+            regPasswordError.text("- Password is required -");
+            error = true;
+        } else if (!pregMatchCommon(regPassword.val())) {
+            regPasswordError.text("- Invalid characters used -");
+            error = true;
+        } else if (regPassword.val().length < 3 || regPassword.val().length > 40) {
+            regPasswordError.text("- Length must be from 3 to 40 characters -");
+            error = true;
+        }
+
+        if (regRePassword.val() === "") {
+            regRePasswordError.text("- Re-Password is required -");
+            error = true;
+        } else if (!pregMatchCommon(regRePassword.val())) {
+            regRePasswordError.text("- Invalid characters used -");
+            error = true;
+        } else if (regRePassword.val().length < 3 || regRePassword.val().length > 40) {
+            regRePasswordError.text("- Length must be from 3 to 40 characters -");
+            error = true;
+        } else if (regPassword.val() !== regRePassword.val()) {
+            regRePasswordError.text("- Passwords don't match -");
+            error = true;
+        }
+
+        if (regM1Fname.val() === "") {
+            regM1FnameError.text("- First name is required -");
+            error = true;
+        } else if (!pregMatchAlphabets(regM1Fname.val())) {
+            regM1FnameError.text("- Only alphabets allowed -");
+            error = true;
+        } else if (regM1Fname.val().length < 2 || regM1Fname.val().length > 40) {
+            regM1FnameError.text("- Length must be from 2 to 40 characters -");
+            error = true;
+        }
+
+        if (regM1Lname.val() === "") {
+            regM1LnameError.text("- Last name is required -");
+            error = true;
+        } else if (!pregMatchAlphabets(regM1Lname.val())) {
+            regM1LnameError.text("- Only alphabets allowed -");
+            error = true;
+        } else if (regM1Lname.val().length < 2 || regM1Lname.val().length > 40) {
+            regM1LnameError.text("- Length must be from 2 to 40 characters -");
+            error = true;
+        }
+
+        if (regM2Fname.val() === "") {
+            regM2FnameError.text("- First name is required -");
+            error = true;
+        } else if (!pregMatchAlphabets(regM2Fname.val())) {
+            regM2FnameError.text("- Only alphabets allowed -");
+            error = true;
+        } else if (regM2Fname.val().length < 2 || regM2Fname.val().length > 40) {
+            regM2FnameError.text("- Length must be from 2 to 40 characters -");
+            error = true;
+        }
+
+        if (regM2Lname.val() === "") {
+            regM2LnameError.text("- Last name is required -");
+            error = true;
+        } else if (!pregMatchAlphabets(regM2Lname.val())) {
+            regM2LnameError.text("- Only alphabets allowed -");
+            error = true;
+        } else if (regM2Lname.val().length < 2 || regM2Lname.val().length > 40) {
+            regM2LnameError.text("- Length must be from 2 to 40 characters -");
+            error = true;
+        }
+
+        if (regOrganisation.val() === "") {
+            regOrganisationError.text("- Organisation is required -");
+            error = true;
+        } else if (!pregMatchComplexName(regOrganisation.val())) {
+            regOrganisationError.text("- Invalid characters used -");
+            error = true;
+        } else if (regOrganisation.val().length < 3 || regOrganisation.val().length > 40) {
+            regOrganisationError.text("- Length must be from 3 to 40 characters -");
+            error = true;
+        }
+
+        if (regLocality.val() === "") {
+            regLocalityError.text("- Locality is required -");
+            error = true;
+        } else if (!pregMatchCommon(regLocality.val())) {
+            regLocalityError.text("- Invalid characters used -");
+            error = true;
+        } else if (regLocality.val().length < 3 || regLocality.val().length > 120) {
+            regLocalityError.text("- Length must be from 3 to 120 characters -");
+            error = true;
+        }
+
+        if (regPhoneNumber === "") {
+            regPhoneNumberError.text("- Phone number is required -");
+            error = true;
+        } else if (!pregMatchNumbers(regPhoneNumber)) {
+            regPhoneNumberError.text("- Only numbers allowed -");
+            error = true;
+        } else if (regPhoneNumber.length !== 10) {
+            regPhoneNumberError.text("- No enough numbers -");
+            error = true;
+        }
+
+        if (error) {
+            regFailMsg.text("- Error, Check input data! -");
+        } else {
+            $.post("php/login-register.php", {
+                teamName: regTeamName.val(),
+                email: regEmail.val(),
+                password: regPassword.val(),
+                m1Fname: regM1Fname.val(),
+                m1Lname: regM1Lname.val(),
+                m2Fname: regM2Fname.val(),
+                m2Lname: regM2Lname.val(),
+                organisation: regOrganisation.val(),
+                locality: regLocality.val(),
+                category: regCategoryError.val(),
+                phoneNumber: regPhoneNumber.val(),
+                action: "REGISTRATION"
+            }, function (data) {
+                if (data === "success") {
+                    regSuccessMsg.text("- Successful Registration -");
+                    regFailMsg.text("");
+
+                    setTimeout(function () {
+                        alert("Success");
+                        //window.location.href = "http://www.w3schools.com";
+                    }, 5000);
+                } else {
+                    regSuccessMsg.text("");
+                    regFailMsg.text(data);
+                }
+            });
+        }
+    });
+
+    /** Clear Registration fields */
+
+    $('#regClearBtn').on('click', function () {
+        clearRegisterValues();
+        clearRegisterMessages();
+    });
+
+    function clearRegisterValues() {
+        // Reserve
+
+        regTeamName.val("");
+        regEmail.val("");
+        regPassword.val("");
+        regRePassword.val("");
+        regM1Fname.val("");
+        regM1Lname.val("");
+        regM2Fname.val("");
+        regM2Lname.val("");
+        regOrganisation.val("");
+        regLocality.val("");
+        regCategory.val("0");
+        regPhoneNumberCode.val("");
+        regPhoneNumberPart1.val("");
+        regPhoneNumberPart2.val("");
+        regPhoneNumberPart3.val("");
+    }
+
+    function clearRegisterMessages() {
+        regFailMsg.text("");
+        regSuccessMsg.text("");
+
+        regTeamNameError.text("");
+        regEmailError.text("");
+        regPasswordError.text("");
+        regRePasswordError.text("");
+        regM1FnameError.text("");
+        regM1LnameError.text("");
+        regM2FnameError.text("");
+        regM2LnameError.text("");
+        regOrganisationError.text("");
+        regLocalityError.text("");
+        regCategoryError.text("");
+        regPhoneNumberError.text("");
+    }
 });
-
-function clearRegisterFields() {
-    // Reserve
-
-    $('#reg-team_name').val("");
-    $('#reg-email').val("");
-    $('#reg-password').val("");
-    $('#reg-re_password').val("");
-    $('#reg-member1_first_name').val("");
-    $('#reg-member1_last_name').val("");
-    $('#reg-member2_first_name').val("");
-    $('#reg-member2_last_name').val("");
-    $('#reg-organisation').val("");
-    $('#reg-locality').val("");
-    $('#reg-category').val("0");
-    $('#reg-phone_number_code').val("");
-    $('#reg-phone_number_part1').val("");
-    $('#reg-phone_number_part2').val("");
-    $('#reg-phone_number_part3').val("");
-
-    $('#reg-team_name_error').text("");
-    $('#reg-email_error').text("");
-    $('#reg-password_error').text("");
-    $('#reg-re_password_error').text("");
-    $('#reg-member1_first_name_error').text("");
-    $('#reg-member1_last_name_error').text("");
-    $('#reg-member2_first_name_error').text("");
-    $('#reg-member2_last_name_error').text("");
-    $('#reg-organisation_error').text("");
-    $('#reg-locality_error').text("");
-    $('#reg-category_error').text("");
-    $('#reg-phone_number_error').text("");
-}
 
 /* --- [Authorization] --- */
 
-// Check the Correctness of input data in Real Time
 $(document).ready(function () {
-    $('#log-email').keyup(function () {
-        $('#log-email-error').text("");
-        $('#fail-msg').text("");
-        if (!validateEmail($('#log-email').val())) {
-            $('#log-email_error').text("- Wrong Email format -");
+    const logFailMsg = $('#logFailMsg');
+    const logSuccessMsg = $('#logSuccessMsg');
+
+    const logEmail = $('#logEmail');
+    const logPassword = $('#logPassword');
+
+    const logEmailError = $('#logEmailError');
+    const logPasswordError = $('#logPasswordError');
+
+    /** Check the Correctness of input data in Real Time */
+
+    logEmail.on('input', function () {
+        logEmailError.text("");
+        logFailMsg.text("");
+        let text = logEmail.val();
+        if (!pregMatchCommon(text)) {
+            logEmailError.text("- Invalid characters used -");
+        } else if (text.length > 40) {
+            logEmailError.text("- Length must be less than 40 characters -");
         }
     });
-    $('#log-password').keyup(function () {
-        $('#log-password_error').text("");
-        $('#fail-msg').text("");
-        if (!pregMatchCommon($('#log-password').val())) {
-            $('#log-password_error').text("- Wrong Password format -");
+    logPassword.on('input', function () {
+        logPasswordError.text("");
+        logFailMsg.text("");
+        let text = logPassword.val();
+        if (!pregMatchCommon(text)) {
+            logPasswordError.text("- Invalid characters used -");
+        } else if (text.length > 40) {
+            logPasswordError.text("- Length must be less than 40 characters -");
         }
     });
-});
 
-// Check the Correctness of input data before inserting to Database
-$(document).ready(function () {
-    $('#log-login-btn').click(function () {
-        $('#fail-msg').text("");
-        $('#success-msg').text("");
+    /** Check the Correctness of input data on Button Click */
 
-        $('#log-email_error').text("");
-        $('#log-password_error').text("");
+    $('#logLoginBtn').on('click', function () {
+        clearLoginMessages()
+        let error = false;
 
-        var email = $('#log-email').val();
-        var password = $('#log-password').val();
-
-        var error = false;
-
-        if (email === "") {
-            $('#log-email_error').text("- Email is required -");
+        if (logEmail.val() === "") {
+            logEmailError.text("- Email is required -");
             error = true;
-        } else if (!validateEmail(email)) {
-            $('#log-email_error').text("- Wrong Email format -");
+        } else if (!validateEmail(logEmail.val())) {
+            logEmailError.text("- Wrong email format -");
+            error = true;
+        } else if (logEmail.val().length < 3 || logEmail.val().length > 40) {
+            logEmailError.text("- Length must be from 3 to 40 characters -");
             error = true;
         }
-        if (password === "") {
-            $('#log-password_error').text("- Password is required -");
+        if (logPassword.val() === "") {
+            logPasswordError.text("- Password is required -");
             error = true;
-        } else if (!pregMatchCommon(password)) {
-            $('#log-password_error').text("- Wrong Password format -");
+        } else if (!pregMatchCommon(logPassword.val())) {
+            logPasswordError.text("- Invalid characters used -");
+            error = true;
+        } else if (logPassword.val().length < 3 || logPassword.val().length > 40) {
+            logPasswordError.text("- Length must be from 3 to 40 characters -");
             error = true;
         }
 
         if (error) {
-            $('#fail-msg').text("- Error, Check input data! -");
+            logFailMsg.text("- Error, Check input data! -");
         } else {
-            $.post("php/login-register.php", {
-                email: email,
-                password: password,
-                action: "authorization"
-            }, function (data) {
-                if (data === "success") {
-                    $('#fail-msg').text("");
-                    clearLoginFields();
-                    window.location.href = "index.php";
-                } else {
-                    $('#fail-msg').text(data);
-                }
-            });
+            alert("Success!");
         }
+//             $.post("php/login-register.php", {
+//                 email: email,
+//                 password: password,
+//                 action: "authorization"
+//             }, function (data) {
+//                 if (data === "success") {
+//                     $('#fail-msg').text("");
+//                     clearLoginFields();
+//                     window.location.href = "index.php";
+//                 } else {
+//                     $('#fail-msg').text(data);
+//                 }
+//             });
+//         }
     });
+
+    /** Clear Authorization fields */
+
+    $('#logClearBtn').on('click', function () {
+        clearLoginValues();
+        clearLoginMessages();
+    });
+
+    function clearLoginValues() {
+        logEmail.val("");
+        logPassword.val("");
+    }
+
+    function clearLoginMessages() {
+        logFailMsg.text("");
+        logSuccessMsg.text("");
+
+        logEmailError.text("");
+        logPasswordError.text("");
+    }
 });
 
-// Clear Authorization fields
-$(document).ready(function () {
-    $('#log-clear-btn').click(function () {
-        $('#fail-msg').text("");
-        clearLoginFields();
-    });
-});
-
-function clearLoginFields() {
-    $('#log-email').val("");
-    $('#log-password').val("");
-
-    $('#log-email_error').text("");
-    $('#log-password_error').text("");
-}

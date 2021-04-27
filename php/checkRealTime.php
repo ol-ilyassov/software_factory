@@ -1,29 +1,69 @@
 <?php
-  //Connect to Database and get array with team Names.
-  //After, encode it in Json and send to Register page.
-  require '../database/dbconnect.php';
 
-  $errMsg = "";
+// Retrieve records from Database
+// Send JSON Encoded Result
 
-  if (true) {
+require '../database/connectDB.php';
 
-  }
+function validateData($data) {
+    return htmlspecialchars(stripslashes(trim($data)));
+}
 
-  $sql = "SELECT login FROM clients";
-  $stmt = $conn->prepare($sql);
-  if ($stmt->execute()) {
-    $result = $stmt->get_result();
-    $records = mysqli_fetch_all($result, MYSQLI_ASSOC);
-  } else {
-    $errMsg = mysqli_error($conn);
-  }
+$errorMsg = "";
+$record = [];
+$response = "";
 
-  $stmt->close();
-  $conn->close();
+if (isset($_POST['field'])) {
+    switch ($_POST['field']) {
+        case "teamname":
+            $teamName = strtolower(validateData($_POST['teamName']));
+            $stmt = "SELECT teamname FROM team WHERE LOWER(teamname)=?";
+            $query1 = $conn->prepare($stmt);
+            $query1->bind_param("s", $teamName);
+            if ($query1->execute()) {
+                $queryResult = $query1->get_result();
+                $record = mysqli_fetch_array($queryResult);
+            } else {
+                $errorMsg = mysqli_error($conn);
+            }
+            $query1->close();
+            $conn->close();
 
-  if ($errMsg != "") {
-    echo $errMsg;
-  } else {
-    echo json_encode($records);
-  }
-?>
+            if ($record['teamname'] == null) {
+                $response = "Free";
+            } else if ($record['teamname'] != null) {
+                $response = "Reserved";
+            } else {
+                $response = $errorMsg;
+            }
+            echo json_encode($response);
+            break;
+        case "email":
+            $email = strtolower(validateData($_POST['email']));
+            $stmt = "SELECT email FROM team WHERE LOWER(email)=?";
+            $query2 = $conn->prepare($stmt);
+            $query2->bind_param("s", $email);
+            if ($query2->execute()) {
+                $queryResult = $query2->get_result();
+                $record = mysqli_fetch_array($queryResult);
+            } else {
+                $errorMsg = mysqli_error($conn);
+            }
+            $query2->close();
+            $conn->close();
+
+            if ($record['email'] == null) {
+                $response = "Free";
+            } else if ($record['email'] != null) {
+                $response = "Reserved";
+            } else {
+                $response = $errorMsg;
+            }
+            echo json_encode($response);
+            break;
+        default:
+            echo json_encode("No Action");
+    }
+
+}
+

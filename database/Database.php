@@ -1,6 +1,8 @@
 <?php
-  //Class Database to make connection with Database.
-  class Database {
+
+/** Database Class connection to MySql */
+
+class Database {
     //Database server
     private $host = "";
     //Database user login
@@ -12,54 +14,54 @@
     //Connection
     private $conn;
 
-    public function Database($host, $user, $pass, $database) {
-      $this->host = $host;
-      $this->user = $user;
-      $this->pass = $pass;
-      $this->database = $database;
+    public function __construct($host, $user, $pass, $database) {
+        $this->host = $host;
+        $this->user = $user;
+        $this->pass = $pass;
+        $this->database = $database;
     }
 
     public function connect() {
-      $this->conn = new mysqli($this->host, $this->user, $this->pass, $this->database);
-      if (mysqli_connect_error()) {
-        return null;
-      } else {
-        return $this->conn;
-      }
+        $this->conn = new mysqli($this->host, $this->user, $this->pass, $this->database);
+        if (mysqli_connect_error()) {
+            return null;
+        } else {
+            return $this->conn;
+        }
     }
 
     //Getters and Setters.
 
     public function getServer() {
-      return $this->host;
+        return $this->host;
     }
 
     public function setServer($host) {
-      $this->host = $host;
+        $this->host = $host;
     }
 
     public function getUserName() {
-      return $this->user;
+        return $this->user;
     }
 
     public function setUserName($user) {
-      $this->user = $user;
+        $this->user = $user;
     }
 
     public function getUserPass() {
-      return $this->pass;
+        return $this->pass;
     }
 
     public function setUserPass($pass) {
-      $this->pass = $pass;
+        $this->pass = $pass;
     }
 
     public function getDbName() {
-      return $this->database;
+        return $this->database;
     }
 
     public function setDbName($database) {
-      $this->database = $database;
+        $this->database = $database;
     }
-  }
-?>
+}
+

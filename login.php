@@ -3,32 +3,32 @@ $title = "Authorization";
 require "includes/header.php"
 ?>
 
-    <div class="wrapper">
-        <div class="container">
-            <h1>Authorization Form</h1>
-            <p id="success-msg" class="success"></p>
-            <p id="fail-msg" class="error"></p>
-            <form role="form" method="POST" name="log-form">
-                <div id="log-form-display">
-                    <div id="log-email_div">
-                        <label for="log-email" id="label">Email:</label><br>
-                        <input id="log-email" type="text">
-                        <p id="log-email_error"></p>
-                    </div>
-                    <div id="log-password_div">
-                        <label for="log-password" id="label">Password:</label><br>
-                        <input id="log-password" type="text">
-                        <p id="log-password_error"></p>
-                    </div>
-                    <div id="buttons">
-                        <input id="log-login-btn" class="btn" name="log-login-btn" type="button" value="Login">
-                        <input id="log-clear-btn" class="btn" name="log-clear-btn" type="button" value="Clear">
-                    </div>
+<div class="wrapper">
+    <div class="container">
+        <h1>Authorization Form</h1>
+        <p id="logSuccessMsg" class="success"></p>
+        <p id="logFailMsg" class="error"></p>
+        <form role="form" method="POST" name="logForm">
+            <div id="logFormDisplay">
+                <div id="logEmailDiv">
+                    <label for="logEmail" id="label">Email:</label><br>
+                    <input id="logEmail" name="logEmail" type="text" maxlength="40">
+                    <p id="logEmailError"></p>
                 </div>
-            </form>
-        </div>
+                <div id="logPasswordDiv">
+                    <label for="logPassword" id="label">Password:</label><br>
+                    <input id="logPassword" name="logPassword" type="text" maxlength="40">
+                    <p id="logPasswordError"></p>
+                </div>
+                <div id="buttons">
+                    <input id="logLoginBtn" class="btn" name="logLoginBtn" type="button" value="Login">
+                    <input id="logClearBtn" class="btn" name="logClearBtn" type="button" value="Clear">
+                </div>
+            </div>
+        </form>
     </div>
+</div>
 
-    <script src="js/login-register.js"></script>
+<script src="js/login-register.js"></script>
 
 <?php require "includes/footer.php" ?>

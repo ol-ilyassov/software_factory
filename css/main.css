@@ -33,28 +33,28 @@ fieldset {
 
 /* - Page: Register - */
 
-#reg-form-display {
+#regFormDisplay {
     display: grid;
     grid-template-columns: repeat(2, 2fr)
 }
 
-#reg-form-display div {
+#regFormDisplay div {
     margin: 5px;
 }
 
-#reg-phone_number_code {
+#regPhoneNumberCode {
     width: 25px;
 }
 
-#reg-phone_number_part1 {
+#regPhoneNumberPart1 {
     width: 25px;
 }
 
-#reg-phone_number_part2 {
+#regPhoneNumberPart2 {
     width: 15px;
 }
 
-#reg-phone_number_part3 {
+#regPhoneNumberPart3 {
     width: 15px;
 }
 
