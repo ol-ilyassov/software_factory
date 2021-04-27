@@ -1,6 +1,7 @@
 <?php
   // Create database connection
-  $db = mysqli_connect("localhost", "root", "", "factory");
+  require "database/connectDB.php";
+  //$db = mysqli_connect("localhost", "root", "", "software_factory");
 
   // Initialize message variable
   $msg = "";
@@ -10,14 +11,14 @@
   	// Get image name
   	$image = $_FILES['image']['name'];
   	// Get text
-  	$image_text = mysqli_real_escape_string($db, $_POST['image_text']);
+  	$image_text = mysqli_real_escape_string($conn, $_POST['image_text']);
 
   	// image file directory
   	$target = "src/gallery/".basename($image);
 
   	$sql = "INSERT INTO gallery (image, description) VALUES ('$image', '$image_text')";
   	// execute query
-  	mysqli_query($db, $sql);
+  	mysqli_query($conn, $sql);
 
   	if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
   		$msg = "Image uploaded successfully";
@@ -25,5 +26,5 @@
   		$msg = "Failed to upload image";
   	}
   }
-  $result = mysqli_query($db, "SELECT * FROM gallery");
+  $result = mysqli_query($conn, "SELECT * FROM gallery");
 ?>

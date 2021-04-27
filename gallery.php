@@ -2,14 +2,14 @@
 session_start();
 
 $title = "Gallery";
-include "includes/upload.php";
+include "includes/gallery_upload.php";
 include "includes/header.php";
 ?>
 
 <div id="content">
 
   <?php
-    include "includes/display.php"
+    include "includes/gallery_display.php"
   ?>
 
   <form id="gallery_form" method="POST" action="gallery.php" enctype="multipart/form-data">

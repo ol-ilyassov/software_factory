@@ -1,11 +1,11 @@
 <?php
 
-$db = mysqli_connect("localhost", "root", "", "factory");
+require "../database/connectDB.php";
 
 if($_GET['action']=="delete"){
     $del_img=$_GET['file_name'];
     $query = "DELETE FROM gallery WHERE image='$del_img'";
-    $res = mysqli_query($db,$query);
+    $res = mysqli_query($conn,$query);
     if($res){
         ?>
         <script>
