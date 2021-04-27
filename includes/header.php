@@ -16,6 +16,7 @@
         <a href="about.php">About</a>
         <a href="gallery.php">Gallery</a>
         <a href="rules.php">Rules</a>
+        <a href="register.php">Register Team</a>
         <a href="login.php">Login</a>
     </div>
 </header>

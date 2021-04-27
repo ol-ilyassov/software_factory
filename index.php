@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $title = "ROBOTICS";
 include "includes/header.php"
 ?>

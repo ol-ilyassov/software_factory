@@ -1,7 +1,6 @@
 <?php
 
-// Retrieve records from Database
-// Send JSON Encoded Result
+/** Retrieve records from Database and Send JSON Encoded Result */
 
 require '../database/connectDB.php';
 
@@ -66,4 +65,3 @@ if (isset($_POST['field'])) {
     }
 
 }
-

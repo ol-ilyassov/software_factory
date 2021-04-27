@@ -1,28 +1,46 @@
 <?php
+session_start();
 
-require '../database/connectDB.php';
+require_once '../database/connectDB.php';
+require_once 'config.php';
 
-function validateData($data)
-{
+function validateData($data) {
     return htmlspecialchars(stripslashes(trim($data)));
 }
 
 if (isset($_POST['action'])) {
     switch ($_POST['action']) {
         case "REGISTRATION":
-            // Work 1
             $teamName = validateData($_POST['teamName']);
             $email = validateData($_POST['email']);
             $password = validateData($_POST['password']);
-            $m1Fname = validateData($_POST['participant1Name']);
-            $m1Lname = validateData($_POST['participant1Surname']);
-            $m2Fname = validateData($_POST['participant2Name']);
-            $m2Lname = validateData($_POST['participant2Surname']);
+            $m1Fname = validateData($_POST['m1Fname']);
+            $m1Lname = validateData($_POST['m1Lname']);
+            $m2Fname = validateData($_POST['m2Fname']);
+            $m2Lname = validateData($_POST['m2Lname']);
             $organisation = validateData($_POST['organisation']);
             $locality = validateData($_POST['locality']);
             $category = validateData($_POST['category']);
             $phoneNumber = validateData($_POST['phoneNumber']);
 
+            $password = md5($password . secretKey1);
+
+            $categoryId = 0;
+            $categoryQuery = "";
+            switch ($category) {
+                case 'Line Follower':
+                    $categoryId = 1;
+                    $categoryQuery = "INSERT INTO linefollower(
+                         team_id, round, time, task1, task2, task3) 
+                         VALUES (?, ?, 0, 0, 0, 0)";
+                    break;
+                case 'Sumo':
+                    $categoryId = 2;
+                    $categoryQuery = "INSERT INTO sumo(
+                         team_id, round, time, task1, task2, task3) 
+                         VALUES (?, ?, 0, 0, 0, 0)";
+                    break;
+            }
 
             $stmt = $conn->prepare("INSERT INTO team(
                  teamname, email, password, p1_fname, p1_lname,
@@ -30,41 +48,110 @@ if (isset($_POST['action'])) {
                  category_id, phonenumber)
                  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                  ");
-            $stmt->bind_param("sssssssssds", $teamName,
+            $stmt->bind_param("sssssssssis", $teamName,
                 $email, $password, $m1Fname, $m1Lname,
                 $m2Fname, $m2Lname, $organisation, $locality,
-                $category, $phoneNumber);
-
+                $categoryId, $phoneNumber);
             $stmt->execute();
-            $idtemp = $stmt->insert_id;
+            $tempId = $stmt->insert_id;
             $stmt->close();
 
-//            if ($category == "Line Follower") {
-//                $stmt1 = $conn->prepare("INSERT INTO linefollower(team_id)
-//        VALUES (?)");
-//                $stmt1->bind_param("i", $idtemp);
-//            } else if ($category == "Kegelring") {
-//                $stmt1 = $conn->prepare("INSERT INTO kegelring(team_id)
-//        VALUES (?)");
-//                $stmt1->bind_param("i", $idtemp);
-//            }
-//
-//            if ($stmt1->execute()) {
-//                echo "success";
-//            } else {
-//                echo mysqli_error($conn);
-//            }
-//
-//            $stmt1->close();
+            $stmtStatus = $conn->prepare(
+                "INSERT INTO team_status(team_id, status_id) VALUES(?, 1)"
+            );
+            $stmtStatus->bind_param("i", $tempId);
+
+            $stmtRound1 = $conn->prepare($categoryQuery);
+            $round1 = 1;
+            $stmtRound1->bind_param("ii", $tempId, $round1);
+
+            $stmtRound2 = $conn->prepare($categoryQuery);
+            $round2 = 2;
+            $stmtRound2->bind_param("ii", $tempId, $round2);
+
+            $stmtRound3 = $conn->prepare($categoryQuery);
+            $round3 = 3;
+            $stmtRound3->bind_param("ii", $tempId, $round3);
+
+            if ($stmtStatus->execute() &&
+                $stmtRound1->execute() &&
+                $stmtRound2->execute() &&
+                $stmtRound3->execute()) {
+                echo "success";
+            } else {
+                echo mysqli_error($conn);
+            }
+            $stmtStatus->close();
+            $stmtRound1->close();
+            $stmtRound2->close();
+            $stmtRound3->close();
             $conn->close();
-
-
             break;
         case "AUTHORIZATION":
-            // Work 2
+            $email = validateData($_POST['email']);
+            $password = validateData($_POST['password']);
+            $password = md5($password . secretKey1);
+            $result = [];
+            $flag = false;
+
+            // Team Validation
+            $queryTeam = "SELECT team_id, teamname FROM team WHERE email=? AND password=?";
+            $stmtTeam = $conn->prepare($queryTeam);
+            $stmtTeam->bind_param("ss", $email, $password);
+            if ($stmtTeam->execute()) {
+                $result = $stmtTeam->get_result();
+                $record = mysqli_fetch_array($result);
+                if ($record['team_id'] != "") {
+                    $_SESSION["id"] = $record['team_id'];
+                    $_SESSION["name"] = $record['teamname'];
+                    $_SESSION["role"] = "team";
+                    echo "success";
+                } else {
+                    // Judge Validation
+                    $queryJudge = "SELECT judge_id, fname FROM judge WHERE email=? AND password=?";
+                    $stmtJudge = $conn->prepare($queryJudge);
+                    $stmtJudge->bind_param("ss", $email, $password);
+                    if ($stmtJudge->execute()) {
+                        $result = $stmtJudge->get_result();
+                        $record = mysqli_fetch_array($result);
+                        if ($record['judge_id'] != "") {
+                            $_SESSION["id"] = $record['judge_id'];
+                            $_SESSION["name"] = $record['fname'];
+                            $_SESSION["role"] = "judge";
+                            echo "success";
+                        } else {
+                            // Admin Validation
+                            $queryAdmin = "SELECT admin_id, fname FROM administrator WHERE email=? AND password=?";
+                            $stmtAdmin = $conn->prepare($queryAdmin);
+                            $stmtAdmin->bind_param("ss", $email, $password);
+                            if ($stmtAdmin->execute()) {
+                                $result = $stmtAdmin->get_result();
+                                $record = mysqli_fetch_array($result);
+                                if ($record['admin_id'] != "") {
+                                    $_SESSION["id"] = $record['admin_id'];
+                                    $_SESSION["name"] = $record['fname'];
+                                    $_SESSION["role"] = "admin";
+                                    echo "success";
+                                } else {
+                                    echo "not found";
+                                }
+                            } else {
+                                echo mysqli_error($conn);
+                            }
+                            $stmtAdmin->close();
+                        }
+                    } else {
+                        echo mysqli_error($conn);
+                    }
+                    $stmtJudge->close();
+                }
+            } else {
+                echo mysqli_error($conn);
+            }
+            $stmtTeam->close();
+            $conn->close();
             break;
         default:
-            // Incorrect POST Request
+            echo "No Action";
     }
-
 }

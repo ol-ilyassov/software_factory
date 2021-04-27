@@ -1,4 +1,7 @@
 <?php
+session_start();
+
+$title = "Gallery";
 include "includes/upload.php";
 include "includes/header.php";
 ?>

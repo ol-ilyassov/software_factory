@@ -1,4 +1,5 @@
-/* --- Functions to validate input data --- */
+
+/** Functions to validate input data */
 
 function validateEmail(input) {
     const emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -63,8 +64,8 @@ $(document).ready(function () {
     const regCategoryError = $('#regCategoryError');
     const regPhoneNumberError = $('#regPhoneNumberError');
 
-    let regTeamNameFree = false;
-    let regEmailFree = false;
+    let regTeamNameReserved = false;
+    let regEmailReserved = false;
     let pnCodeBool = true;
     let pnPart1Bool = true;
     let pnPart2Bool = true;
@@ -85,14 +86,14 @@ $(document).ready(function () {
                 if (data === "Reserved") {
                     regTeamNameStatus.text("Reserved");
                     regTeamNameStatus.css("color", "red");
-                    regTeamNameFree = false;
+                    regTeamNameReserved = true;
                 } else if (data === "Free") {
                     regTeamNameStatus.text("Free");
                     regTeamNameStatus.css("color", "green");
-                    regTeamNameFree = true;
+                    regTeamNameReserved = false;
                 } else {
                     console.log(data);
-                    regTeamNameFree = false;
+                    regTeamNameReserved = true;
                 }
             });
         }
@@ -113,14 +114,14 @@ $(document).ready(function () {
                 if (data === "Reserved") {
                     regEmailStatus.text("Reserved");
                     regEmailStatus.css("color", "red");
-                    regEmailFree = false;
+                    regEmailReserved = true;
                 } else if (data === "Free") {
                     regEmailStatus.text("Free");
                     regEmailStatus.css("color", "green");
-                    regEmailFree = true;
+                    regEmailReserved = false;
                 } else {
                     console.log(data);
-                    regEmailFree = false;
+                    regEmailReserved = true;
                 }
             });
         }
@@ -281,7 +282,7 @@ $(document).ready(function () {
             regPhoneNumberPart2.val() + regPhoneNumberPart3.val();
         let error = false;
 
-        if (regCategory.val() === "0") {
+        if (regCategory.val() === "-") {
             $('#regCategoryError').text("- Category is required -");
             error = true;
         }
@@ -295,11 +296,10 @@ $(document).ready(function () {
         } else if (regTeamName.val().length < 3 || regTeamName.val().length > 40) {
             regTeamNameError.text("- Length must be from 3 to 40 characters -");
             error = true;
+        } else if (regTeamNameReserved) {
+            regTeamNameError.text("- Team name is reserved -");
+            error = true;
         }
-        // else if (false) {
-        //     // Reserved
-        //     error = true;
-        // }
 
         if (regEmail.val() === "") {
             regEmailError.text("- Email is required -");
@@ -310,11 +310,10 @@ $(document).ready(function () {
         } else if (regEmail.val().length < 3 || regEmail.val().length > 40) {
             regEmailError.text("- Length must be from 3 to 40 characters -");
             error = true;
+        } else if (regEmailReserved) {
+            regEmailError.text("- Email is reserved -");
+            error = true;
         }
-        // else if (false) {
-        //     // Reserved
-        //     error = true;
-        // }
 
         if (regPassword.val() === "") {
             regPasswordError.text("- Password is required -");
@@ -399,7 +398,7 @@ $(document).ready(function () {
         if (regLocality.val() === "") {
             regLocalityError.text("- Locality is required -");
             error = true;
-        } else if (!pregMatchCommon(regLocality.val())) {
+        } else if (!pregMatchComplexName(regLocality.val())) {
             regLocalityError.text("- Invalid characters used -");
             error = true;
         } else if (regLocality.val().length < 3 || regLocality.val().length > 120) {
@@ -431,21 +430,22 @@ $(document).ready(function () {
                 m2Lname: regM2Lname.val(),
                 organisation: regOrganisation.val(),
                 locality: regLocality.val(),
-                category: regCategoryError.val(),
-                phoneNumber: regPhoneNumber.val(),
+                category: regCategory.val(),
+                phoneNumber: regPhoneNumber,
                 action: "REGISTRATION"
             }, function (data) {
                 if (data === "success") {
                     regSuccessMsg.text("- Successful Registration -");
                     regFailMsg.text("");
-
+                    clearRegisterValues();
                     setTimeout(function () {
-                        alert("Success");
-                        //window.location.href = "http://www.w3schools.com";
-                    }, 5000);
+                        window.location.href = "index.php";
+                    }, 3000);
                 } else {
                     regSuccessMsg.text("");
-                    regFailMsg.text(data);
+                    clearRegisterValues();
+                    console.log(data);
+                    regFailMsg.text("- Fail, Try again later -");
                 }
             });
         }
@@ -471,7 +471,7 @@ $(document).ready(function () {
         regM2Lname.val("");
         regOrganisation.val("");
         regLocality.val("");
-        regCategory.val("0");
+        regCategory.val("-");
         regPhoneNumberCode.val("");
         regPhoneNumberPart1.val("");
         regPhoneNumberPart2.val("");
@@ -562,22 +562,27 @@ $(document).ready(function () {
         if (error) {
             logFailMsg.text("- Error, Check input data! -");
         } else {
-            alert("Success!");
+            $.post("php/login-register.php", {
+                email: logEmail.val(),
+                password: logPassword.val(),
+                action: "AUTHORIZATION"
+            }, function (data) {
+                clearLoginValues();
+                if (data === "success") {
+                    logSuccessMsg.text("- Successful Authorization -");
+                    logFailMsg.text("");
+                    setTimeout(function () {
+                        window.location.href = "index.php";
+                    }, 3000);
+                } else if (data === "not found") {
+                    logSuccessMsg.text("");
+                    logFailMsg.text("- Incorrect Login and/or Password");
+                } else {
+                    console.log(data);
+                    logFailMsg.text("- Fail, Try Again Later -");
+                }
+            });
         }
-//             $.post("php/login-register.php", {
-//                 email: email,
-//                 password: password,
-//                 action: "authorization"
-//             }, function (data) {
-//                 if (data === "success") {
-//                     $('#fail-msg').text("");
-//                     clearLoginFields();
-//                     window.location.href = "index.php";
-//                 } else {
-//                     $('#fail-msg').text(data);
-//                 }
-//             });
-//         }
     });
 
     /** Clear Authorization fields */

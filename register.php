@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $title = "Registration";
 require "includes/header.php"
 ?>
@@ -69,7 +71,7 @@ require "includes/header.php"
                 <div id="regCategoryDiv">
                     <label for="regCategory" id="label">Category:</label><br>
                     <select id="regCategory" name="regCategory">
-                        <option value="0"></option>
+                        <option value="-"></option>
                         <option value="Line Follower">Line Follower</option>
                         <option value="Sumo">Sumo</option>
                     </select>
