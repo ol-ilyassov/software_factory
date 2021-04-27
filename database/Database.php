@@ -3,15 +3,10 @@
 /** Database Class connection to MySql */
 
 class Database {
-    //Database server
     private $host = "";
-    //Database user login
     private $user = "";
-    //Database user password
     private $pass = "";
-    //Database name
     private $database = "";
-    //Connection
     private $conn;
 
     public function __construct($host, $user, $pass, $database) {
@@ -29,8 +24,6 @@ class Database {
             return $this->conn;
         }
     }
-
-    //Getters and Setters.
 
     public function getServer() {
         return $this->host;

@@ -1,8 +1,8 @@
 <?php
+session_start();
 
 /** Logout and Session Destroy */
 
-session_start();
 if (isset($_SESSION['id'])) {
     setcookie(session_name(), '', 100);
     unset($_SESSION['id']);
@@ -12,4 +12,4 @@ if (isset($_SESSION['id'])) {
     session_destroy();
     $_SESSION = array();
 }
-header("Location: ../index.php");
+header("Location: /software_factory/");
