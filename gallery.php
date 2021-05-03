@@ -18,7 +18,7 @@ include "includes/header.php";
   	  <input type="file" name="image">
   	</div>
   	<div>
-      <textarea id="text" cols="40" rows="4" name="image_text" placeholder="Description of image..."></textarea>
+      <textarea id="text" cols="40" rows="4" name="image_text" placeholder="Description of image..." required></textarea>
   	</div>
   	<div>
   		<button type="submit" name="upload">POST</button>
