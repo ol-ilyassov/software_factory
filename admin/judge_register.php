@@ -11,6 +11,6 @@ if(isset($_POST['new']) && $_POST['new']==1){
     (fname, lname, description, email, password)values
     ('$fname','$lname','$description','$email','$password')";
     mysqli_query($conn,$ins_query);
-    header('Location: judgeCOntrolPanel.php');
+    header('Location: judgeControlPanel.php');
 }
 ?>

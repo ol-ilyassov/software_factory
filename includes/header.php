@@ -19,35 +19,35 @@ if (!isset($_SESSION)) {
     <a href="/software_factory/" class="logo">RoboticsLogo</a>
     <div class="header-right">
         <a href="/software_factory/">Home</a>
-        <a href="/software_factory/about.php">About</a>
-        <a href="/software_factory/gallery.php">Gallery</a>
-        <a href="/software_factory/rules.php">Rules</a>
-        <a href="/software_factory/statistics.php">Statistics</a>
+        <a href="/software_factory/about">About</a>
+        <a href="/software_factory/gallery">Gallery</a>
+        <a href="/software_factory/rules">Rules</a>
+        <a href="/software_factory/statistics">Statistics</a>
         <?php
         if (isset($_SESSION["role"])) {
             $role = $_SESSION["role"];
             switch ($role) {
                 case 'team':
                     // 1
-                    echo '<a href="/software_factory/team/profile.php">Profile</a>';
-                    echo '<a href="/software_factory/team/control.php">Control Panel</a>';
+                    echo '<a href="/software_factory/team/profile">Profile</a>';
+                    echo '<a href="/software_factory/team/control">Control Panel</a>';
                     break;
                 case 'judge':
                     // 2
-                    echo '<a href="/software_factory/judge/profile.php">Profile</a>';
-                    echo '<a href="/software_factory/judge/control.php">Control Panel</a>';
+                    echo '<a href="/software_factory/judge/profile">Profile</a>';
+                    echo '<a href="/software_factory/judge/control">Control Panel</a>';
                     break;
                 case 'admin':
                     // 3
-                    echo '<a href="/software_factory/admin/profile.php">Profile</a>';
-                    echo '<a href="/software_factory/admin/control.php">Control Panel</a>';
+                    echo '<a href="/software_factory/admin/profile">Profile</a>';
+                    echo '<a href="/software_factory/admin/control">Control Panel</a>';
                     break;
             }
-            echo '<a href="/software_factory/php/logout.php">Log out</a>';
+            echo '<a href="/software_factory/php/logout">Log out</a>';
         } else {
-            echo '<a href="/software_factory/scores.php">Score Tables</a>';
-            echo '<a href="/software_factory/register.php">Register Team</a>';
-            echo '<a href="/software_factory/login.php">Login</a>';
+            echo '<a href="/software_factory/scores">Score Tables</a>';
+            echo '<a href="/software_factory/register">Register Team</a>';
+            echo '<a href="/software_factory/login">Login</a>';
         } ?>
 
 
