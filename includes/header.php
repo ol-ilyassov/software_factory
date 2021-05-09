@@ -27,17 +27,17 @@ if (!isset($_SESSION)) {
         if (isset($_SESSION["role"])) {
             $role = $_SESSION["role"];
             switch ($role) {
-                case 'team':
+                case "team":
                     // 1
                     echo '<a href="/software_factory/team/profile">Profile</a>';
                     echo '<a href="/software_factory/team/control">Control Panel</a>';
                     break;
-                case 'judge':
+                case "judge":
                     // 2
                     echo '<a href="/software_factory/judge/profile">Profile</a>';
                     echo '<a href="/software_factory/judge/control">Control Panel</a>';
                     break;
-                case 'admin':
+                case "admin":
                     // 3
                     echo '<a href="/software_factory/admin/profile">Profile</a>';
                     echo '<a href="/software_factory/admin/control">Control Panel</a>';
@@ -49,7 +49,6 @@ if (!isset($_SESSION)) {
             echo '<a href="/software_factory/register">Register Team</a>';
             echo '<a href="/software_factory/login">Login</a>';
         } ?>
-
 
     </div>
 </header>

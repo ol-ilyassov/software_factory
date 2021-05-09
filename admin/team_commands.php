@@ -1,14 +1,4 @@
 <?php
-  //Returns teamName by using inputted id.
-  function getTeamName($conn, $input) {
-    $input = (int)$input;
-    $stmt = $conn->prepare('SELECT teamName FROM teams WHERE team_id = ?');
-    $stmt->bind_param('i', $input);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $row = $result->fetch_assoc();
-    return $row['teamName'];
-  }
 
   //Returns records about teams from specific table ($tablename).
   function teams_all_onecategory($conn, $tablename) {

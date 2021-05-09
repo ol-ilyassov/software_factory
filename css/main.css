@@ -13,63 +13,23 @@ fieldset {
     border: none;
 }
 
-.btn {
-    background: orange;
-    border: 1px solid orange;
-    color: white;
-    margin: 10px;
-    padding: 15px;
+html {
+    height: 100%;
 }
 
-.btn:hover {
-    background: white;
-    color: orange;
-}
-
-.btn:active {
-    background: darkorange;
-    color: white;
-}
-
-/* - Page: Register - */
-
-#regFormDisplay {
-    display: grid;
-    grid-template-columns: repeat(2, 2fr)
-}
-
-#regFormDisplay div {
-    margin: 5px;
-}
-
-#regPhoneNumberCode {
-    width: 25px;
-}
-
-#regPhoneNumberPart1 {
-    width: 25px;
-}
-
-#regPhoneNumberPart2 {
-    width: 15px;
-}
-
-#regPhoneNumberPart3 {
-    width: 15px;
-}
-
-#buttons {
-    grid-column-start: 1;
-    grid-column-end: 3;
+body {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    height: 100%;
 }
 
-/* Common Elements - Header */
+.wrapper {
+    flex-grow: 1;
+}
+
+/* - Header - */
 
 header {
-    overflow: hidden;
     background-color: #f1f1f1;
     padding: 20px 10px;
 }
@@ -116,26 +76,94 @@ header a:hover {
     }
 }
 
-body {
-    margin: 0;
-    padding: 0;
-    text-decoration: none;
-}
+/* - Footer - */
 
 footer {
-    position: fixed;
-    padding: 10px 10px 0px 10px;
-    bottom: 0;
-    width: 100vw;
-    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 0 30px 0;
+    width: 100%;
     background: #f1f1f1;
     text-align: center;
 }
 
 footer a {
-    text-decoration: none;
     color: red;
 }
+
+.btn {
+    background: orange;
+    border: 1px solid orange;
+    color: white;
+    margin: 10px;
+    padding: 10px;
+}
+
+.btn:hover {
+    background: white;
+    color: orange;
+}
+
+.btn:active {
+    background: darkorange;
+    color: white;
+}
+
+.btnLink {
+    background: orange;
+    border: 1px solid orange;
+    color: white;
+    margin: 10px;
+    padding: 10px;
+}
+
+.btnLink:hover {
+    background: white;
+    color: orange;
+}
+
+.btnLink:active {
+    background: darkorange;
+    color: white;
+}
+
+/* - Page: Register - */
+
+#regFormDisplay {
+    display: grid;
+    grid-template-columns: repeat(2, 2fr)
+}
+
+#regFormDisplay div {
+    margin: 5px;
+}
+
+#regPhoneNumberCode {
+    width: 25px;
+}
+
+#regPhoneNumberPart1 {
+    width: 25px;
+}
+
+#regPhoneNumberPart2 {
+    width: 15px;
+}
+
+#regPhoneNumberPart3 {
+    width: 15px;
+}
+
+#buttons {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* - Gallery - */
 
 #content {
     width: 50%;
@@ -170,4 +198,17 @@ footer a {
     margin: 5px;
     width: 150px;
     height: 140px;
+}
+
+/* - scores_records - */
+
+#lineFollowerTableManage {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+}
+
+#lineFollowerTableManage div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

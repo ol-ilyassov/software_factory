@@ -2,14 +2,14 @@
 session_start();
 
 $title = "About Us";
-include "includes/header.php"
+require "includes/header.php"
 ?>
 
-<div style="padding-left:20px">
+<div class="wrapper">
     <h1>About Us</h1>
     <h2>Some content...</h2>
 </div>
 
 <?php
-include "includes/footer.php"
+require "includes/footer.php"
 ?>

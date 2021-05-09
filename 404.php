@@ -8,6 +8,6 @@
     </style>
 </head>
 <body>
-<img width="100%" src="src/stuff/404.png">
+<img width="100%" src="/software_factory/src/stuff/404.png">
 </body>
 </html>

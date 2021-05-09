@@ -1,0 +1,14 @@
+
+- Прописывать Адреса относительно корневой папки
+
+- Прописывать ссылку без расширения на конце
+
+- Давать названия относительно Camel Cases
+
+- Сессия:
+
+SELECT id, linefollower.team_id, team.teamname, time, task1, task2, task3
+FROM `linefollower`
+INNER JOIN `team`
+ON linefollower.team_id=team.team_id
+WHERE round = 1
