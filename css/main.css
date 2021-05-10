@@ -1,6 +1,7 @@
 /* - Common Parameters - */
 
 * {
+    font-family: Arial;
     margin: 0;
     padding: 0;
 }
@@ -111,11 +112,13 @@ footer a {
 }
 
 .btnLink {
+    display: inline-block;
     background: orange;
     border: 1px solid orange;
     color: white;
     margin: 10px;
     padding: 10px;
+    border-radius: 2px;
 }
 
 .btnLink:hover {
@@ -208,6 +211,17 @@ footer a {
 }
 
 #lineFollowerTableManage div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#lineFollowerTable {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+#lineFollowerTable div {
     display: flex;
     justify-content: center;
     align-items: center;

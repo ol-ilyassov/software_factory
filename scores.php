@@ -1,6 +1,8 @@
 <?php
-$title = "Score Tables [Administrator]";
-require "../includes/header.php";
+$title = "Score Tables";
+require "database/connectDB.php";
+require "php/getScores.php";
+require "includes/header.php";
 ?>
 
 <div class="wrapper">
@@ -18,7 +20,7 @@ require "../includes/header.php";
                 echo "<div><p> - NO TEAMS - </p></div>";
             } else {
                 ?>
-                <div id="lineFollowerTableManage">
+                <div id="lineFollowerTable">
                     <div>#</div>
                     <div>Team</div>
                     <div><p>Task #1</p></div>
@@ -26,7 +28,6 @@ require "../includes/header.php";
                     <div><p>Task #3</p></div>
                     <div><p>Total</p></div>
                     <div><p>Time</p></div>
-                    <div><p>ACTION</p></div>
                     <?php foreach ($records as $a): ?>
                         <div><?= ++$counter ?></div>
                         <div><?= $a["teamname"] ?></div>
@@ -35,12 +36,6 @@ require "../includes/header.php";
                         <div><?= $a["task3"] ?></div>
                         <div><?= $a["total"] ?></div>
                         <div><?= $a["time"] ?></div>
-                        <div>
-                            <a class="btnLink"
-                               href="scores.php?action=edit&tableName=<?= $tableName ?>&id=<?= $a['id'] ?>">
-                                EDIT
-                            </a>
-                        </div>
                     <?php endforeach ?>
                 </div>
                 <?php
@@ -52,5 +47,5 @@ require "../includes/header.php";
 </div>
 
 <?php
-require "../includes/footer.php";
+require "includes/footer.php";
 ?>
