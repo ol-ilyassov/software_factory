@@ -6,9 +6,12 @@ function recordsAll($conn, $tableName, $round)
     $tableName = mysqli_real_escape_string($conn, $tableName);
     $tableName = stripslashes($tableName);
 
-    $query = "SELECT id, teamname, task1, task2, task3, (task1 + task2 + task3) as 'total', time FROM $tableName INNER JOIN `team` ON $tableName.team_id=team.team_id WHERE round = $round ORDER BY total DESC, time ASC";
+    $stmt = "SELECT id, teamname, task1, task2, task3, 
+       (task1 + task2 + task3) as 'total', time FROM `%s` 
+       INNER JOIN `team` ON `%s`.team_id=team.team_id WHERE 
+       round = %d ORDER BY total DESC, time ASC";
+    $query = sprintf($stmt, $tableName, $tableName, $round);
     $result = mysqli_query($conn, $query);
-
     if (!$result)
         die(mysqli_error($conn));
 
@@ -32,66 +35,43 @@ function recordGet($conn, $recordId, $tableName)
     $recordId = mysqli_real_escape_string($conn, $recordId);
     $recordId = (int)stripslashes($recordId);
 
-    $query = sprintf("SELECT id, teamname, round, task1, task2, task3, time FROM $tableName INNER JOIN `team` ON $tableName.team_id = team.team_id WHERE id=%d", $recordId);
+    $stmt = "SELECT id, teamname, round, task1, task2, task3, time FROM `%s` INNER JOIN `team` ON `%s`.team_id = team.team_id WHERE id=%d";
+    $query = sprintf($stmt, $tableName, $tableName, $recordId);
     $result = mysqli_query($conn, $query);
-
     if (!$result)
         die(mysqli_error($conn));
 
     return mysqli_fetch_assoc($result);
 }
 
-/** -EDIT- */
-
 function recordEdit($conn, $id, $task1, $task2, $task3, $time, $tableName)
 {
+    $id = mysqli_real_escape_string($conn, $id);
     $id = (int)$id;
+    $task1 = mysqli_real_escape_string($conn, $task1);
     $task1 = (int)$task1;
+    $task2 = mysqli_real_escape_string($conn, $task2);
     $task2 = (int)$task2;
+    $task3 = mysqli_real_escape_string($conn, $task3);
     $task3 = (int)$task3;
-    $time = (int)$time;
+    $time = mysqli_real_escape_string($conn, $time);
 
-    //Make the error flag.
     $error = false;
 
-    //Check the variables. The variable must store certain values. task1,task2,task3 must store 0;5 ro 10.
-    //Timem must store value from 0 to 2.
-    //Times must store value from 0 to 59.
-    if (($task1 < 0) || ($task1 > 10))
+    if ($task1 < 0 || $task1 > 10)
         $error = true;
-    if (($task2 < 0) || ($task2 > 10))
+    if ($task2 < 0 || $task2 > 10)
         $error = true;
-    if (($task3 < 0) || ($task3 > 10))
+    if ($task3 < 0 || $task3 > 10)
         $error = true;
-    if (($timem < 0) || ($timem > 2))
-        $error = true;
-    if (($times < 0) || ($times > 59))
-        $error = true;
-    if (($timem == 2) && ($times <> 0))
-        $error = true;
-    if ((!preg_match('/^[0-9]*$/', $times)) || (!preg_match('/^[0-9]*$/', $timem)) || (!preg_match('/^[0-9]*$/', $white_count)) || (!preg_match('/^[0-9]*$/', $black_count)))
+    if ($time < "00:00:00" || $time > "00:02:00")
         $error = true;
 
-    //If the variable store the value that will be equal to 'true', then sql query will not be made.
     if ($error == false) {
-        $sum_scores = ($task1 + $task2 + $task3);
-        //Query for updating data in table with name that given by external variable ($tablename).
-        $sql = "UPDATE $tablename SET task1='%d', task2='%d', task3='%d', sum_scores='%d', timem='%d', times='%d' WHERE id='%d'";
-        $query = sprintf($sql,
-            mysqli_real_escape_string($conn, $task1),
-            mysqli_real_escape_string($conn, $task2),
-            mysqli_real_escape_string($conn, $task3),
-            mysqli_real_escape_string($conn, $sum_scores),
-            mysqli_real_escape_string($conn, $timem),
-            mysqli_real_escape_string($conn, $times),
-            $id);
-
-        //Check the correctness of query. If the query did not work, the site will not be shown.
+        $stmt = "UPDATE `%s` SET task1=%d, task2=%d, task3=%d, time='%s' WHERE id=%d";
+        $query = sprintf($stmt, $tableName, $task1, $task2, $task3, $time, $id);
         $result = mysqli_query($conn, $query);
-
         if (!$result)
             die(mysqli_error($conn));
     }
 }
-
-?>

@@ -21,7 +21,7 @@ require "../includes/header.php";
             <h2>Team: <?= $record["teamname"] ?></h2>
             <h3>Round #<?= $record["round"] ?></h3>
             <form role="form" method="POST" name="scoreEdit"
-                  action="scores.php?action=edit?>&tableName=<?= $_GET["tableName"] ?>&id=<?= $_GET["id"] ?>">
+                  action="scores.php?action=edit&tableName=<?= $_GET["tableName"] ?>&id=<?= $_GET["id"] ?>">
                 <div id="task1Div">
                     <label for="task1" class="label">Task #1</label>
                     <input id="task1" name="task1" type="text" value="<?= $record["task1"] ?>"
