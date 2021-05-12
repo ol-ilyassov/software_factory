@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Апр 27 2021 г., 20:23
+-- Время создания: Май 13 2021 г., 01:00
 -- Версия сервера: 10.1.38-MariaDB
 -- Версия PHP: 7.3.2
 
@@ -40,7 +40,7 @@ CREATE TABLE `administrator` (
 --
 
 INSERT INTO `administrator` (`admin_id`, `fname`, `email`, `password`) VALUES
-(1, 'Olzhas', 'ol.ilyassov@gmail.com', 'b2a2c3f03b613d49b478a403ff23f119');
+(1, 'Olzhas', 'ol.ilyassov@gmail.com', 'cdb88e64771f7914113d85078def265f');
 
 -- --------------------------------------------------------
 
@@ -61,18 +61,6 @@ INSERT INTO `category` (`category_id`, `title`) VALUES
 (0, '-'),
 (1, 'Line Follower'),
 (2, 'Sumo');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `gallery`
---
-
-CREATE TABLE `gallery` (
-  `id` int(11) NOT NULL,
-  `image` varchar(200) NOT NULL,
-  `description` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -116,6 +104,33 @@ CREATE TABLE `linefollower` (
   `task2` int(11) NOT NULL,
   `task3` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `linefollower`
+--
+
+INSERT INTO `linefollower` (`id`, `team_id`, `round`, `time`, `task1`, `task2`, `task3`) VALUES
+(1, 1, 1, '00:01:00', 5, 5, 5),
+(2, 1, 1, '00:01:05', 5, 5, 5);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `settings`
+--
+
+CREATE TABLE `settings` (
+  `id` int(11) NOT NULL,
+  `parameter` varchar(100) NOT NULL,
+  `value` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `settings`
+--
+
+INSERT INTO `settings` (`id`, `parameter`, `value`) VALUES
+(1, 'registerAccess', 'Open');
 
 -- --------------------------------------------------------
 
@@ -209,12 +224,6 @@ ALTER TABLE `category`
   ADD PRIMARY KEY (`category_id`);
 
 --
--- Индексы таблицы `gallery`
---
-ALTER TABLE `gallery`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Индексы таблицы `judge`
 --
 ALTER TABLE `judge`
@@ -234,6 +243,12 @@ ALTER TABLE `judge_category`
 ALTER TABLE `linefollower`
   ADD PRIMARY KEY (`id`),
   ADD KEY `team_id_line_fk` (`team_id`) USING BTREE;
+
+--
+-- Индексы таблицы `settings`
+--
+ALTER TABLE `settings`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Индексы таблицы `status`
@@ -280,12 +295,6 @@ ALTER TABLE `category`
   MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT для таблицы `gallery`
---
-ALTER TABLE `gallery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT для таблицы `judge`
 --
 ALTER TABLE `judge`
@@ -301,7 +310,13 @@ ALTER TABLE `judge_category`
 -- AUTO_INCREMENT для таблицы `linefollower`
 --
 ALTER TABLE `linefollower`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT для таблицы `settings`
+--
+ALTER TABLE `settings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT для таблицы `status`
