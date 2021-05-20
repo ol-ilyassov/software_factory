@@ -9,9 +9,9 @@ require "includes/header.php";
     <div id="content">
 
         <?php
-        require "admin/gallery_display.php"
+        require "admin/gallery_display.php";
+        if(isset($_SESSION['role'])=="admin"){
         ?>
-
         <form id="gallery_form" method="POST" action="gallery.php" enctype="multipart/form-data">
             <input type="hidden" name="size">
             <div>
@@ -25,6 +25,9 @@ require "includes/header.php";
                 <button type="submit" name="upload">POST</button>
             </div>
         </form>
+        <?php
+            }
+            ?>
     </div>
 </div>
 <?php
