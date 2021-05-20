@@ -2,14 +2,14 @@
 session_start();
 
 $title = "Gallery";
-require "includes/gallery_upload.php";
+require "admin/gallery_upload.php";
 require "includes/header.php";
 ?>
 <div class="wrapper">
     <div id="content">
 
         <?php
-        require "includes/gallery_display.php"
+        require "admin/gallery_display.php"
         ?>
 
         <form id="gallery_form" method="POST" action="gallery.php" enctype="multipart/form-data">
