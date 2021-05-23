@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Май 13 2021 г., 01:00
+-- Время создания: Май 23 2021 г., 21:46
 -- Версия сервера: 10.1.38-MariaDB
 -- Версия PHP: 7.3.2
 
@@ -65,6 +65,18 @@ INSERT INTO `category` (`category_id`, `title`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `gallery`
+--
+
+CREATE TABLE `gallery` (
+  `id` int(11) NOT NULL,
+  `image` varchar(200) NOT NULL,
+  `description` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `judge`
 --
 
@@ -92,6 +104,22 @@ CREATE TABLE `judge_category` (
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `kegelring`
+--
+
+CREATE TABLE `kegelring` (
+  `id` int(11) NOT NULL,
+  `team_id` int(11) NOT NULL,
+  `round` int(11) NOT NULL,
+  `time` time NOT NULL,
+  `task1` int(11) NOT NULL,
+  `task2` int(11) NOT NULL,
+  `task3` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `linefollower`
 --
 
@@ -110,7 +138,7 @@ CREATE TABLE `linefollower` (
 --
 
 INSERT INTO `linefollower` (`id`, `team_id`, `round`, `time`, `task1`, `task2`, `task3`) VALUES
-(1, 1, 1, '00:01:00', 5, 5, 5),
+(1, 1, 1, '00:01:14', 5, 5, 5),
 (2, 1, 1, '00:01:05', 5, 5, 5);
 
 -- --------------------------------------------------------
@@ -130,7 +158,7 @@ CREATE TABLE `settings` (
 --
 
 INSERT INTO `settings` (`id`, `parameter`, `value`) VALUES
-(1, 'registerAccess', 'Open');
+(1, 'registerAccess', 'Closed');
 
 -- --------------------------------------------------------
 
@@ -151,22 +179,6 @@ INSERT INTO `status` (`status_id`, `status`) VALUES
 (1, 'active'),
 (2, 'disqualified'),
 (3, 'in process...');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `sumo`
---
-
-CREATE TABLE `sumo` (
-  `id` int(11) NOT NULL,
-  `team_id` int(11) NOT NULL,
-  `round` int(11) NOT NULL,
-  `time` time NOT NULL,
-  `task1` int(11) NOT NULL,
-  `task2` int(11) NOT NULL,
-  `task3` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -224,6 +236,12 @@ ALTER TABLE `category`
   ADD PRIMARY KEY (`category_id`);
 
 --
+-- Индексы таблицы `gallery`
+--
+ALTER TABLE `gallery`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `judge`
 --
 ALTER TABLE `judge`
@@ -236,6 +254,13 @@ ALTER TABLE `judge_category`
   ADD PRIMARY KEY (`id`),
   ADD KEY `judge_id_fk` (`judge_id`),
   ADD KEY `category_id_fk` (`category_id`);
+
+--
+-- Индексы таблицы `kegelring`
+--
+ALTER TABLE `kegelring`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `team_id_sumo_fk` (`team_id`);
 
 --
 -- Индексы таблицы `linefollower`
@@ -255,13 +280,6 @@ ALTER TABLE `settings`
 --
 ALTER TABLE `status`
   ADD PRIMARY KEY (`status_id`);
-
---
--- Индексы таблицы `sumo`
---
-ALTER TABLE `sumo`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `team_id_sumo_fk` (`team_id`);
 
 --
 -- Индексы таблицы `team`
@@ -295,6 +313,12 @@ ALTER TABLE `category`
   MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT для таблицы `gallery`
+--
+ALTER TABLE `gallery`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT для таблицы `judge`
 --
 ALTER TABLE `judge`
@@ -304,6 +328,12 @@ ALTER TABLE `judge`
 -- AUTO_INCREMENT для таблицы `judge_category`
 --
 ALTER TABLE `judge_category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `kegelring`
+--
+ALTER TABLE `kegelring`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -323,12 +353,6 @@ ALTER TABLE `settings`
 --
 ALTER TABLE `status`
   MODIFY `status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT для таблицы `sumo`
---
-ALTER TABLE `sumo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `team`
@@ -354,16 +378,16 @@ ALTER TABLE `judge_category`
   ADD CONSTRAINT `judge_category_ibfk_2` FOREIGN KEY (`judge_id`) REFERENCES `judge` (`judge_id`);
 
 --
+-- Ограничения внешнего ключа таблицы `kegelring`
+--
+ALTER TABLE `kegelring`
+  ADD CONSTRAINT `kegelring_ibfk_1` FOREIGN KEY (`team_id`) REFERENCES `team` (`team_id`);
+
+--
 -- Ограничения внешнего ключа таблицы `linefollower`
 --
 ALTER TABLE `linefollower`
   ADD CONSTRAINT `linefollower_ibfk_1` FOREIGN KEY (`team_id`) REFERENCES `team` (`team_id`);
-
---
--- Ограничения внешнего ключа таблицы `sumo`
---
-ALTER TABLE `sumo`
-  ADD CONSTRAINT `sumo_ibfk_1` FOREIGN KEY (`team_id`) REFERENCES `team` (`team_id`);
 
 --
 -- Ограничения внешнего ключа таблицы `team`
