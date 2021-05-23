@@ -14,7 +14,7 @@
   	$image_text = mysqli_real_escape_string($conn, $_POST['image_text']);
 
   	// image file directory
-  	$target = "src/gallery/".basename($image);
+  	$target = "../src/gallery/".basename($image);
 
   	$sql = "INSERT INTO gallery (image, description) VALUES ('$image', '$image_text')";
   	// execute query
