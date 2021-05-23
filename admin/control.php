@@ -11,7 +11,7 @@ require "../includes/header.php"
 <div class="wrapper">
     <div>
         <p>Judge Control:</p>
-        <a class="btnLink" href="/software_factory/admin/judge_display">Go</a>
+        <a class="btnLink" href="/software_factory/admin/judgeControlPanel">Go</a>
     </div>
     <div>
         <p>Categories Control:</p>
