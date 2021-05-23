@@ -12,7 +12,7 @@ if($number_of_rows > 0) {
 
 $output = '';
 $output .= '
- <table style="margin:50px auto">
+ <table>
   <tr>
    <th>ID</th>
    <th>Firstname</th>
