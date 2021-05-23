@@ -16,7 +16,7 @@ if (!isset($_SESSION)) {
 </head>
 <body>
 <header>
-    <a href="/software_factory/" class="logo">RoboticsLogo</a>
+    <a href="/software_factory/" class="logo"><img width="25px" height="25px" src="src/stuff/logo-transp.png"</a>
     <div class="header-right">
         <a href="/software_factory/">Home</a>
         <a href="/software_factory/about">About</a>

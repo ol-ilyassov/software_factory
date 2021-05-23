@@ -1,6 +1,6 @@
 <?php
   // Create database connection
-  require "database/connectDB.php";
+  require "../database/connectDB.php";
   //$db = mysqli_connect("localhost", "root", "", "software_factory");
 
   // Initialize message variable

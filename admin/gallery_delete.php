@@ -10,7 +10,7 @@ if($_GET['action']=="delete"){
         ?>
         <script>
         alert("The image has been deleted");
-        window.location.href='../gallery.php';
+        window.location.href='gallery.php';
         </script>
 
     <?php
@@ -20,7 +20,7 @@ if($_GET['action']=="delete"){
         ?>
         <script>
         alert("The image not yet delete");
-        window.location.href='../gallery.php';
+        window.location.href='gallery.php';
         </script>
         <?php
     }

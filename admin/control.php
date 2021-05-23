@@ -19,7 +19,7 @@ require "../includes/header.php"
     </div>
     <div>
         <p>Teams Control:</p>
-        <a class="btnLink" href="/software_factory/admin/teams">Go</a>
+        <a class="btnLink" href="/software_factory/admin/teamsControlPage">Go</a>
     </div>
     <div>
         <p>Gallery Control:</p>
