@@ -10,43 +10,49 @@ if (!isset($_SESSION)) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link rel="shortcut icon" href="/software_factory/src/stuff/logo-transp.png"/>
+    <link rel="shortcut icon" href="/software_factory/src/stuff/logo.png"/>
     <link rel="stylesheet" href="/software_factory/css/main.css"/>
-    <title><?= $title ?></title>
+    <link rel="stylesheet" href="/software_factory/css/left-nav-style.css">
+    <title><?=$title?></title>
 </head>
 <body>
-<header>
-    <a href="/software_factory/" class="logo"><img width="25px" height="25px" src="src/stuff/logo-transp.png"</a>
-    <div class="header-right">
-        <a href="/software_factory/">Home</a>
-        <a href="/software_factory/about">About</a>
-        <a href="/software_factory/gallery">Gallery</a>
-        <a href="/software_factory/rules">Rules</a>
-        <a href="/software_factory/statistics">Statistics</a>
-        <a href="/software_factory/scores">Score Tables</a>
+
+<input type="checkbox" id="nav-toggle" hidden>
+<nav class="nav">
+    <label for="nav-toggle" class="nav-toggle" onclick></label>
+    <h2>Menu</h2>
+    <ul>
+        <li><a href="/software_factory/">Home</a></li>
+        <li><a href="/software_factory/about">About</a></li>
+        <li><a href="/software_factory/gallery">Gallery</a></li>
+        <li><a href="/software_factory/rules">Rules</a></li>
+        <li><a href="/software_factory/statistics">Statistics</a></li>
+        <li><a href="/software_factory/scores">Score Tables</a></li>
         <?php
         if (isset($_SESSION["role"])) {
             $role = $_SESSION["role"];
             switch ($role) {
                 case "team":
-                    echo '<a href="/software_factory/team/profile">Profile</a>';
-                    echo '<a href="/software_factory/team/control">Control Panel</a>';
+                    echo '<li><a href="/software_factory/team/profile">Profile</a></li>';
+                    echo '<li><a href="/software_factory/team/control">Control Panel</a></li>';
                     break;
                 case "judge":
-                    echo '<a href="/software_factory/judge/profile">Profile</a>';
-                    echo '<a href="/software_factory/judge/control">Control Panel</a>';
+                    echo '<li><a href="/software_factory/judge/profile">Profile</a></li>';
+                    echo '<li><a href="/software_factory/judge/control">Control Panel</a></li>';
                     break;
                 case "admin":
-                    echo '<a href="/software_factory/admin/profile">Profile</a>';
-                    echo '<a href="/software_factory/admin/control">Control Panel</a>';
+                    echo '<li><a href="/software_factory/admin/profile">Profile</a></li>';
+                    echo '<li><a href="/software_factory/admin/control">Control Panel</a></li>';
                     break;
             }
-            echo '<a href="/software_factory/php/logout">Log out</a>';
+            echo '<li><a href="/software_factory/php/logout">Log out</a></li>';
         } else {
-            //if
-            echo '<a href="/software_factory/register">Register Team</a>';
-            echo '<a href="/software_factory/login">Login</a>';
+            echo '<li><a href="/software_factory/register">Register Team</a></li>';
+            echo '<li><a href="/software_factory/login">Login</a></li>';
         } ?>
+    </ul>
+</nav>
 
-    </div>
+<header>
+    <a href="/software_factory/"><img src="/software_factory/src/stuff/logo.png" alt="logo"></a>
 </header>
