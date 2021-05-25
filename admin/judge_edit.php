@@ -22,6 +22,7 @@ mysqli_query($conn, $update);
 header("Location: judgeControlPanel.php"); 
 }else {
 ?>
+<div class = "wrapper">
 <div style="margin: 10px;">
 <form name="form" method="post" action=""> 
 <input type="hidden" name="new" value="1" />
@@ -38,6 +39,8 @@ required value="<?php echo $row['email'];?>" /></p><br>
 required value="<?php echo $row['password'];?>" /></p><br>
 <p><input name="submit" type="submit" value="Update" /></p>
 </form>
+</div>
+</div>
 <?php }; 
 include "../includes/footer.php";
 ?>
