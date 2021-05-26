@@ -19,7 +19,7 @@ require "includes/header.php";
                 echo "<h3> Round #$round: </h3>";
 
                 if (empty($records)) {
-                    echo "<div><p> - NO TEAMS - </p></div>";
+                    echo "<div class='centerLock'><p> - NO TEAMS - </p></div>";
                 } else {
                     ?>
                     <div id="table_scores">

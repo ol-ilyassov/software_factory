@@ -53,7 +53,7 @@ header {
     width: 100%;
 }
 
-header img{
+header img {
     width: auto;
     height: 15vh;
 }
@@ -126,6 +126,11 @@ footer {
     color: #ffea00;
 }
 
+.footer-container .contacts p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .footer-container .rights {
     margin-top: 30px;
     display: flex;
@@ -145,6 +150,11 @@ footer {
     color: #ffea00;
 }
 
+.footer-container .rights p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .footer-container .address {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -159,6 +169,11 @@ footer {
     font-size: 18px;
     margin-bottom: 9px;
     color: #ffea00;
+}
+
+.footer-container .address p {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 /* - Page: Index - */
@@ -280,29 +295,67 @@ footer {
 
 /* - Page: Register - */
 
-#regFormDisplay {
-    display: grid;
-    grid-template-columns: repeat(2, 2fr)
+/* */
+.form-register div input {
+    margin: 5px;
+    padding: 5px;
+    height: 30px;
+    font-size: 21px;
 }
 
-#regFormDisplay div {
+.form-register div select {
     margin: 5px;
+    height: 30px;
+    font-size: 21px;
+}
+
+.form-register .buttons {
+    grid-column: 1/3;
+}
+
+/* */
+
+#regFormDisplay {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr)
+}
+
+#regFormDisplay .regInputDiv {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    margin: 5px;
+    padding: 5px;
 }
 
 #regPhoneNumberCode {
-    width: 25px;
+    width: 30px;
 }
 
 #regPhoneNumberPart1 {
-    width: 25px;
+    width: 30px;
 }
 
 #regPhoneNumberPart2 {
-    width: 15px;
+    width: 20px;
 }
 
 #regPhoneNumberPart3 {
-    width: 15px;
+    width: 20px;
+}
+
+#regFormDisplay .regInput {
+    margin: 5px;
+    padding: 5px;
+    height: 15px;
+    font-size: 18px;
+}
+
+#regFormDisplay .regSelect {
+    margin: 5px;
+    height: 30px;
+    font-size: 18px;
 }
 
 #buttons {
@@ -311,6 +364,7 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: row;
 }
 
 /* - Page: Gallery - */
@@ -438,6 +492,7 @@ footer {
 
 .block0 li {
     margin-left: 20px;
+    margin-bottom: 20px;
 }
 
 .block0 ol, ul {
@@ -455,6 +510,7 @@ footer {
 
 .block1 li {
     margin-left: 20px;
+    margin-bottom: 20px;
 }
 
 .block1 ol, ul {
@@ -472,6 +528,7 @@ footer {
 
 .block2 li {
     margin-left: 20px;
+    margin-bottom: 20px;
 }
 
 .block2 ol, ul {
@@ -549,6 +606,7 @@ footer {
     color: white;
     margin: 10px;
     padding: 10px;
+    font-size: 18px;
 }
 
 .btn:hover {
@@ -598,4 +656,12 @@ footer {
 .centerLock img {
     width: 80%;
     height: auto;
+}
+
+.error {
+    color: red;
+}
+
+.success {
+    color: lawngreen;
 }
