@@ -8,7 +8,7 @@ require "includes/header.php"
 <div class="wrapper">
     <div id="left-right">
         <div class="block0">
-            <h2>Registration Form</h2>
+            <h2>Team Registration</h2>
             <div class="centerLock">
                 <p id="regSuccessMsg" class="success"></p>
                 <p id="regFailMsg" class="error"></p>
@@ -115,5 +115,6 @@ require "includes/header.php"
 
 
 <script src="js/login-register.js"></script>
+<script src="js/regPageControl.js"></script>
 
 <?php require "includes/footer.php" ?>

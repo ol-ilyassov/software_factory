@@ -13,10 +13,10 @@ if (!isset($_SESSION)) {
     <link rel="shortcut icon" href="/software_factory/src/stuff/logo.png"/>
     <link rel="stylesheet" href="/software_factory/css/main.css"/>
     <link rel="stylesheet" href="/software_factory/css/left-nav-style.css">
-    <title><?=$title?></title>
+    <title><?= $title ?></title>
 </head>
 <body>
-
+<script src="/software_factory/js/regPageDisplay.js"></script>
 <input type="checkbox" id="nav-toggle" hidden>
 <nav class="nav">
     <label for="nav-toggle" class="nav-toggle" onclick></label>
@@ -34,20 +34,17 @@ if (!isset($_SESSION)) {
             switch ($role) {
                 case "team":
                     echo '<li><a href="/software_factory/team/profile">Profile</a></li>';
-                    echo '<li><a href="/software_factory/team/control">Control Panel</a></li>';
                     break;
                 case "judge":
-                    echo '<li><a href="/software_factory/judge/profile">Profile</a></li>';
                     echo '<li><a href="/software_factory/judge/control">Control Panel</a></li>';
                     break;
                 case "admin":
-                    echo '<li><a href="/software_factory/admin/profile">Profile</a></li>';
                     echo '<li><a href="/software_factory/admin/control">Control Panel</a></li>';
                     break;
             }
             echo '<li><a href="/software_factory/php/logout">Log out</a></li>';
         } else {
-            echo '<li><a href="/software_factory/register">Register Team</a></li>';
+            echo '<li><a id="regPage" href="/software_factory/register">Team Registration</a></li>';
             echo '<li><a href="/software_factory/login">Login</a></li>';
         } ?>
     </ul>
