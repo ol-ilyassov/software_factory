@@ -30,13 +30,13 @@ require "includes/header.php"
                     </div>
                     <div class="regInputDiv" id="regPasswordDiv">
                         <label for="regPassword" class="label">Password:</label>
-                        <input class="regInput" id="regPassword" name="regPassword" type="text" maxlength="40"
+                        <input class="regInput" id="regPassword" name="regPassword" type="password" maxlength="40"
                                placeholder="Enter Password">
                         <p class="error" id="regPasswordError"></p>
                     </div>
                     <div class="regInputDiv" id="regRePasswordDiv">
                         <label for="regRePassword" class="label">Re-Password:</label>
-                        <input class="regInput" id="regRePassword" name="regRePassword" type="text" maxlength="40"
+                        <input class="regInput" id="regRePassword" name="regRePassword" type="password" maxlength="40"
                                placeholder="Enter Password">
                         <p class="error" id="regRePasswordError"></p>
                     </div>

@@ -30,7 +30,7 @@
 
   //Returns all information about team by using inputted id.
   function getTeamInfoById($conn, $id) {
-    $stmt = $conn->prepare("SELECT * FROM team WHERE team_id=?");
+    $stmt = $conn->prepare("SELECT teamname, email, p1_fname, p2_fname, p1_lname, p2_lname, organisation, locality, phonenumber, category.title FROM team INNER JOIN category ON team.category_id = category.category_id  WHERE team_id=?");
     $stmt->bind_param("i", $id);
     if ($stmt->execute()) {
       $result = $stmt->get_result();

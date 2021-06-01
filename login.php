@@ -8,11 +8,11 @@ require "includes/header.php"
     <div class="wrapper">
         <div id="left-right">
             <div class="block0">
-                <h2>Authorization</h2>
+                <h2>Log in</h2>
                 <div class="centerLock">
                     <p id="logSuccessMsg" class="success"></p>
                     <p id="logFailMsg" class="error"></p>
-                </div>v
+                </div>
                 <form role="form" method="POST" name="logForm">
                     <div id="logFormDisplay">
                         <div class="logInputDiv" id="logEmailDiv">
@@ -22,7 +22,7 @@ require "includes/header.php"
                         </div>
                         <div class="logInputDiv" id="logPasswordDiv">
                             <label for="logPassword" id="label">Password:</label>
-                            <input class="logInput" id="logPassword" name="logPassword" type="text" maxlength="40" placeholder="Enter Password">
+                            <input class="logInput" id="logPassword" name="logPassword" type="password" maxlength="40" placeholder="Enter Password">
                             <p class="error" id="logPasswordError"></p>
                         </div>
                         <div id="buttons">

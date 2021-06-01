@@ -11,26 +11,31 @@ require "../includes/header.php"
 <div class="wrapper">
     <div id="left-right">
         <div class="block0">
-            <div>
+            <h2>Profile</h2>
+        </div>
+        <hr>
+        <div class="block1">
+            <h2>Functions</h2>
+            <div class="controlDiv">
                 <p>Judge Control:</p>
                 <a class="btnLink" href="/software_factory/admin/judgeControlPanel">Go</a>
             </div>
-            <div>
+            <div class="controlDiv">
                 <p>Categories Control:</p>
                 <a class="btnLink" href="/software_factory/admin/scores">Go</a>
             </div>
-            <div>
+            <div class="controlDiv">
                 <p>Teams Control:</p>
                 <a class="btnLink" href="/software_factory/admin/teamsControlPage">Go</a>
             </div>
-            <div>
+            <div class="controlDiv">
                 <p>Gallery Control:</p>
                 <a class="btnLink" href="/software_factory/admin/gallery">Go</a>
             </div>
-            <div>
-                <p>Register Page Access:</p>
-                <p>Status: [<span id="registerPageStatus">Status</span>]</p>
-                <input id="registerAccessBtn" class="btn" name="registerAccessBtn" type="button" value="Change">
+            <div class="controlDiv">
+                <p>Access to Registration<br>
+                Status: [<span id="registerPageStatus">Status</span>]</p>
+                <input id="registerAccessBtn" class="btn" name="registerAccessBtn" type="button" value="Modify">
             </div>
         </div>
     </div>

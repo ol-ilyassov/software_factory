@@ -17,13 +17,13 @@ require "../includes/header.php";
 
 <div class="wrapper">
     <div id="left-right">
-        <article class="block0">
+        <div class="block0">
             <h2>Category: Line Follower</h2>
             <br><br>
             <?php
             $records = teams_all_onecategory($conn, 1);
             if (empty($records)) {
-                echo "<center><p> - NO TEAMS - </p></center>";
+                echo "<div class='centerLock'><p> - NO TEAMS - </p></div>";
             } else {
                 ?>
                 <div id="tcp">
@@ -34,26 +34,22 @@ require "../includes/header.php";
                         ?>
                         <div id="tcpLeftBlock"><?= getTeamName($conn, $a['team_id']) ?></div>
                         <div id="tcpRightBlock">
-                            <a class="aButton" href="team_info.php?id=<?= $a['team_id'] ?>">
-                                <div class="alinkButton">INFO</div>
-                            </a>
-                            <a class="aButton" href="php/deleteTeam.php?id=<?= $a['team_id'] ?>">
-                                <div class="alinkButton">DELETE</div>
-                            </a>
+                            <a class="btnLink" href="team_info.php?id=<?= $a['team_id'] ?>">INFO</a>
+                            <a class="btnLink" href="php/deleteTeam.php?id=<?= $a['team_id'] ?>">DELETE</a>
                         </div>
                     <?php endforeach ?>
                 </div>
             <?php } ?>
             <br>
-        </article>
+        </div>
         <hr>
-        <article class="block1">
+        <div class="block1">
             <h2>Category: Kegelring</h2>
             <br><br>
             <?php
             $records = teams_all_onecategory($conn, 2);
             if (empty($records)) {
-                echo "<center><p> - NO TEAMS - </p></center>";
+                echo "<div class='centerLock'><p> - NO TEAMS - </p></div>";
             } else {
                 ?>
                 <div id="tcp">
@@ -64,18 +60,14 @@ require "../includes/header.php";
                         ?>
                         <div id="tcpLeftBlock"><?= getTeamName($conn, $a['team_id']) ?></div>
                         <div id="tcpRightBlock">
-                            <a class="aButton" href="team_info.php?id=<?= $a['team_id'] ?>">
-                                <div class="alinkButton">INFO</div>
-                            </a>
-                            <a class="aButton" href="../php/deleteTeam.php?id=<?= $a['team_id'] ?>">
-                                <div class="alinkButton">DELETE</div>
-                            </a>
+                            <a class="btnLink" href="team_info.php?id=<?= $a['team_id'] ?>">INFO</a>
+                            <a class="btnLink" href="php/deleteTeam.php?id=<?= $a['team_id'] ?>">DELETE</a>
                         </div>
                     <?php endforeach ?>
                 </div>
             <?php } ?>
             <br>
-        </article>
+        </div>
     </div>
 </div>
 

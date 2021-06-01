@@ -18,34 +18,33 @@ require "../includes/header.php";
 
 <div class="wrapper">
     <div id="left-right">
-        <article class="block0">
+        <div class="block0">
             <h2>Team Info: "<?= $row['teamname'] ?>" </h2>
             <br><br>
             <div id="ti">
                 <div id="tiLeft"><p>Category: </p></div>
-                <div id="tiRight"><?= $row['category_id'] ?></div>
+                <div id="tiRight"><p> &nbsp;<?= $row['title'] ?></p></div>
                 <div id="tiLeft"><p>Participant Name #1: </p></div>
-                <div id="tiRight"><?= $row['p1_fname'] ?></div>
+                <div id="tiRight"><p> &nbsp;<?= $row['p1_fname'] ?></p></div>
                 <div id="tiLeft"><p>Participant Surname #1: </p></div>
-                <div id="tiRight"><?= $row['p1_lname'] ?></div>
+                <div id="tiRight"><p> &nbsp;<?= $row['p1_lname'] ?></p></div>
                 <div id="tiLeft"><p>Participant Name #2: </p></div>
-                <div id="tiRight"><?= $row['p2_fname'] ?></div>
+                <div id="tiRight"><p> &nbsp;<?= $row['p2_fname'] ?></p></div>
                 <div id="tiLeft"><p>Participant Surname #2: </p></div>
-                <div id="tiRight"><?= $row['p2_lname'] ?></div>
+                <div id="tiRight"><p> &nbsp;<?= $row['p2_lname'] ?></p></div>
                 <div id="tiLeft"><p>Organisation: </p></div>
-                <div id="tiRight"><?= $row['organisation'] ?></div>
+                <div id="tiRight"><p> &nbsp;<?= $row['organisation'] ?></p></div>
                 <div id="tiLeft"><p>Locality: </p></div>
-                <div id="tiRight"><?= $row['locality'] ?></div>
+                <div id="tiRight"><p> &nbsp;<?= $row['locality'] ?></p></div>
                 <div id="tiLeft"><p>Telephone: </p></div>
-                <div id="tiRight"><?= $row['phonenumber'] ?></div>
+                <div id="tiRight"><p> &nbsp;<?= $row['phonenumber'] ?></p></div>
                 <div id="tiLeft"><p>Email: </p></div>
-                <div id="tiRight"><?= $row['email'] ?></div>
+                <div id="tiRight"><p> &nbsp;<?= $row['email'] ?></p></div>
             </div>
-            <center><a class="aButton" href="teamsControlPage.php">
-                    <div class="alinkButton">BACK</div>
-                </a></center>
-            <br>
-        </article>
+            <div class="centerLock">
+                <a class="btnLink" href="teamsControlPage.php">BACK</a>
+            </div>
+        </div>
     </div>
 </div>
 

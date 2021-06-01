@@ -614,6 +614,21 @@ footer {
     border-right: 1px solid black;
 }
 
+/* - Scores Admin - */
+
+#table_scores_admin {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#table_scores_admin div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* - Common Buttons - */
 
 .btn {
@@ -643,6 +658,7 @@ footer {
     margin: 10px;
     padding: 10px;
     border-radius: 2px;
+    font-size: 18px;
 }
 
 .btnLink:hover {
@@ -667,6 +683,7 @@ footer {
     justify-content: center;
     align-items: center;
     width: 100%;
+    flex-direction: column;
 }
 
 .centerLock img {
@@ -680,4 +697,81 @@ footer {
 
 .success {
     color: lawngreen;
+}
+
+/* - Page: Control.php - */
+.controlDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 1px solid darkorange;
+    padding: 3px;
+    margin-bottom: 20px;
+}
+
+.controlDiv p {
+    margin: 10px 5px 0 5px;
+    text-align: center;
+}
+
+/* - Page: TeamsControlpage.php - */
+#tcp {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+#tcpLeftHead {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    text-decoration: underline;
+    border-bottom: 1px solid black;
+}
+#tcpRightHead {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    text-decoration: underline;
+    border-bottom: 1px solid black;
+}
+
+#tcpLeftBlock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+}
+
+#tcpRightBlock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+}
+
+/* - Team Info - */
+
+#ti {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+#ti div{
+    display: flex;
+    align-items: center;
+}
+
+#tiLeft {
+    justify-content: flex-end;
+    color: gray;
+}
+
+#tiRight {
+    justify-content: flex-start;
 }
