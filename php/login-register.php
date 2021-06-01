@@ -34,9 +34,9 @@ if (isset($_POST['action'])) {
                          team_id, round, time, task1, task2, task3) 
                          VALUES (?, ?, 0, 0, 0, 0)";
                     break;
-                case 'Sumo':
+                case 'Kegelring':
                     $categoryId = 2;
-                    $categoryQuery = "INSERT INTO sumo(
+                    $categoryQuery = "INSERT INTO kegelring(
                          team_id, round, time, task1, task2, task3) 
                          VALUES (?, ?, 0, 0, 0, 0)";
                     break;

@@ -15,6 +15,12 @@ include "judge_display.php";
 <p><input type="text" name="lname" placeholder="Enter Last Name" required /></p><br>
 <p><input type="text" name="description" placeholder="Enter Description" required /></p><br>
 <p><input type="text" name="email" placeholder="Enter Email" required /></p><br>
+<p><span>Category:</span>
+<select name="judgeCategory">
+<option value="-"></option>
+<option value="Line Follower">Line Follower</option>
+<option value="Kegelring">Kegelring</option>
+</select></p><br>
 <p><input type="text" name="password" placeholder="Enter Password" required /></p><br>
 <p><input name="submit" type="submit" value="Submit" /></p>
 </form>

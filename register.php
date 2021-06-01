@@ -87,7 +87,7 @@ require "includes/header.php"
                         <select class="regSelect" id="regCategory" name="regCategory">
                             <option value="-"></option>
                             <option value="Line Follower">Line Follower</option>
-                            <option value="Sumo">Sumo</option>
+                            <option value="Kegelring">Kegelring</option>
                         </select>
                         <p class="error" id="regCategoryError"></p>
                     </div>
