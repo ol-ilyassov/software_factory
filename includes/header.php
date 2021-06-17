@@ -26,8 +26,8 @@ if (!isset($_SESSION)) {
         <li><a href="/software_factory/about">About</a></li>
         <li><a href="/software_factory/gallery">Gallery</a></li>
         <li><a href="/software_factory/rules">Rules</a></li>
-        <li><a href="/software_factory/statistics">Statistics</a></li>
         <li><a href="/software_factory/scores">Score Tables</a></li>
+        <li><a href="/software_factory/statistics">Winners</a></li>
         <?php
         if (isset($_SESSION["role"])) {
             $role = $_SESSION["role"];

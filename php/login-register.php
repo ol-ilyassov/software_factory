@@ -56,11 +56,6 @@ if (isset($_POST['action'])) {
             $tempId = $stmt->insert_id;
             $stmt->close();
 
-            $stmtStatus = $conn->prepare(
-                "INSERT INTO team_status(team_id, status_id) VALUES(?, 1)"
-            );
-            $stmtStatus->bind_param("i", $tempId);
-
             $stmtRound1 = $conn->prepare($categoryQuery);
             $round1 = 1;
             $stmtRound1->bind_param("ii", $tempId, $round1);
@@ -73,15 +68,13 @@ if (isset($_POST['action'])) {
             $round3 = 3;
             $stmtRound3->bind_param("ii", $tempId, $round3);
 
-            if ($stmtStatus->execute() &&
-                $stmtRound1->execute() &&
+            if ($stmtRound1->execute() &&
                 $stmtRound2->execute() &&
                 $stmtRound3->execute()) {
                 echo "success";
             } else {
                 echo mysqli_error($conn);
             }
-            $stmtStatus->close();
             $stmtRound1->close();
             $stmtRound2->close();
             $stmtRound3->close();

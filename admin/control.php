@@ -4,7 +4,7 @@ if (empty($_SESSION["role"]) || $_SESSION["role"] != "admin") {
     header("Location: /software_factory/");
 }
 
-$title = "ROBOTICS";
+$title = "Control Panel";
 require "../includes/header.php"
 ?>
 

@@ -566,6 +566,13 @@ footer {
 
 /* - Scores - */
 
+#table_scores_winners {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 #table_scores {
     display: grid;
     grid-template-columns: repeat(7, 1fr);

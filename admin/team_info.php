@@ -10,7 +10,7 @@ require "../database/connectDB.php";
 require "../php/commandsTeam.php";
 $row = getTeamInfoById($conn, $_GET['id']);
 
-$title = "«RIG» - " . $row['teamname'] . " Info";
+$title = $row['teamname'] . " Info";
 require "../includes/header.php";
 ?>
 

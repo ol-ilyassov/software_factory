@@ -9,7 +9,7 @@ if (empty($_SESSION["role"]) || $_SESSION["role"] != "admin") {
 require "../database/connectDB.php";
 require "../php/commandsTeam.php";
 
-$title = "«RIG» - Teams Control";
+$title = "Teams Control Panel";
 require "../includes/header.php";
 ?>
 
@@ -35,7 +35,7 @@ require "../includes/header.php";
                         <div id="tcpLeftBlock"><?= getTeamName($conn, $a['team_id']) ?></div>
                         <div id="tcpRightBlock">
                             <a class="btnLink" href="team_info.php?id=<?= $a['team_id'] ?>">INFO</a>
-                            <a class="btnLink" href="php/deleteTeam.php?id=<?= $a['team_id'] ?>">DELETE</a>
+                            <a class="btnLink" href="/software_factory/php/deleteTeam.php?id=<?= $a['team_id'] ?>">DELETE</a>
                         </div>
                     <?php endforeach ?>
                 </div>
