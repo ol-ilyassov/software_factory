@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Май 23 2021 г., 21:46
+-- Время создания: Июн 17 2021 г., 20:48
 -- Версия сервера: 10.1.38-MariaDB
 -- Версия PHP: 7.3.2
 
@@ -60,7 +60,7 @@ CREATE TABLE `category` (
 INSERT INTO `category` (`category_id`, `title`) VALUES
 (0, '-'),
 (1, 'Line Follower'),
-(2, 'Sumo');
+(2, 'Kegelring');
 
 -- --------------------------------------------------------
 
@@ -73,6 +73,15 @@ CREATE TABLE `gallery` (
   `image` varchar(200) NOT NULL,
   `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Дамп данных таблицы `gallery`
+--
+
+INSERT INTO `gallery` (`id`, `image`, `description`) VALUES
+(4, 'IMG-20180623-WA0005.jpg', 'WRO-2018'),
+(6, 'IMG-20170703-WA0009.jpg', 'WRO-2017'),
+(7, 'IMG-20170704-WA0002.jpg', 'WRO-2017');
 
 -- --------------------------------------------------------
 
@@ -89,6 +98,13 @@ CREATE TABLE `judge` (
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Дамп данных таблицы `judge`
+--
+
+INSERT INTO `judge` (`judge_id`, `fname`, `lname`, `description`, `email`, `password`) VALUES
+(1, 'Talgat', 'Keinepov', 'Teacher of NIS', 't.keinepov@gmail.com', 'cdb88e64771f7914113d85078def265f');
+
 -- --------------------------------------------------------
 
 --
@@ -100,6 +116,13 @@ CREATE TABLE `judge_category` (
   `judge_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `judge_category`
+--
+
+INSERT INTO `judge_category` (`id`, `judge_id`, `category_id`) VALUES
+(1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -138,8 +161,12 @@ CREATE TABLE `linefollower` (
 --
 
 INSERT INTO `linefollower` (`id`, `team_id`, `round`, `time`, `task1`, `task2`, `task3`) VALUES
-(1, 1, 1, '00:01:14', 5, 5, 5),
-(2, 1, 1, '00:01:05', 5, 5, 5);
+(3, 2, 1, '00:00:38', 5, 5, 5),
+(4, 2, 2, '00:01:00', 4, 4, 4),
+(5, 2, 3, '00:00:11', 5, 5, 6),
+(6, 5, 1, '00:00:12', 8, 8, 0),
+(7, 5, 2, '00:00:11', 8, 3, 1),
+(8, 5, 3, '00:01:05', 5, 4, 5);
 
 -- --------------------------------------------------------
 
@@ -158,7 +185,7 @@ CREATE TABLE `settings` (
 --
 
 INSERT INTO `settings` (`id`, `parameter`, `value`) VALUES
-(1, 'registerAccess', 'Closed');
+(1, 'registerAccess', 'Open');
 
 -- --------------------------------------------------------
 
@@ -206,18 +233,8 @@ CREATE TABLE `team` (
 --
 
 INSERT INTO `team` (`team_id`, `teamname`, `email`, `password`, `p1_fname`, `p1_lname`, `p2_fname`, `p2_lname`, `organisation`, `locality`, `category_id`, `phonenumber`) VALUES
-(1, 'BostonJuniors', 'bostonDgroup@gmail.com', 'cdb88e64771f7914113d85078def265f', 'Temirlan', 'Seitkali', 'Abylay', 'Seilbek', 'BostonDynamics', 'Nur-Sultan', 1, '7751756513');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `team_status`
---
-
-CREATE TABLE `team_status` (
-  `team_id` int(11) NOT NULL,
-  `status_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+(2, 'Fishers', 'fishers@gmail.com', 'cdb88e64771f7914113d85078def265f', 'Sam', 'Jackson', 'John', 'Karagen', 'FishersK', 'Kostanay', 1, '7778021532'),
+(5, 'Riggers', 'rigger@gmail.com', 'cdb88e64771f7914113d85078def265f', 'Talgat', 'Kanapov', 'Marat', 'Paratov', 'Kickers', 'Kokshetau', 1, '6096651425');
 
 --
 -- Индексы сохранённых таблиц
@@ -289,14 +306,6 @@ ALTER TABLE `team`
   ADD KEY `category_id_team_fk` (`category_id`);
 
 --
--- Индексы таблицы `team_status`
---
-ALTER TABLE `team_status`
-  ADD PRIMARY KEY (`team_id`),
-  ADD KEY `team_id_status_fk` (`team_id`),
-  ADD KEY `status_id_fk` (`status_id`);
-
---
 -- AUTO_INCREMENT для сохранённых таблиц
 --
 
@@ -316,19 +325,19 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT для таблицы `gallery`
 --
 ALTER TABLE `gallery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT для таблицы `judge`
 --
 ALTER TABLE `judge`
-  MODIFY `judge_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `judge_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT для таблицы `judge_category`
 --
 ALTER TABLE `judge_category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT для таблицы `kegelring`
@@ -340,7 +349,7 @@ ALTER TABLE `kegelring`
 -- AUTO_INCREMENT для таблицы `linefollower`
 --
 ALTER TABLE `linefollower`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT для таблицы `settings`
@@ -358,13 +367,7 @@ ALTER TABLE `status`
 -- AUTO_INCREMENT для таблицы `team`
 --
 ALTER TABLE `team`
-  MODIFY `team_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT для таблицы `team_status`
---
-ALTER TABLE `team_status`
-  MODIFY `team_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `team_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
@@ -394,13 +397,6 @@ ALTER TABLE `linefollower`
 --
 ALTER TABLE `team`
   ADD CONSTRAINT `team_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`);
-
---
--- Ограничения внешнего ключа таблицы `team_status`
---
-ALTER TABLE `team_status`
-  ADD CONSTRAINT `team_status_ibfk_1` FOREIGN KEY (`status_id`) REFERENCES `status` (`status_id`),
-  ADD CONSTRAINT `team_status_ibfk_2` FOREIGN KEY (`team_id`) REFERENCES `team` (`team_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
